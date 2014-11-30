@@ -2,9 +2,9 @@ package com.blitting.display;
 
 import com.blitting.lifecycle.IDisposable;
 import com.blitting.lifecycle.IInitializable;
-import flash.geom.Point;
-import flash.display.Sprite;
-import flash.geom.Rectangle;
+import openfl.geom.Point;
+import openfl.display.Sprite;
+import openfl.geom.Rectangle;
 
 class AbstractViewport extends Sprite
     implements IViewport
