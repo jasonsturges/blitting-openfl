@@ -1,7 +1,7 @@
 package com.blitting.display;
 
-import flash.geom.Point;
-import flash.geom.Rectangle;
+import openfl.geom.Point;
+import openfl.geom.Rectangle;
 
 interface IViewport {
 
