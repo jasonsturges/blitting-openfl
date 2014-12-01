@@ -1,12 +1,11 @@
 package com.blitting.display;
 
-import com.blitting.lifecycle.IDisposable;
-import com.blitting.lifecycle.IValidatable;
 import openfl.display.DisplayObject;
 import openfl.display.StageAlign;
 import openfl.display.StageScaleMode;
 import openfl.events.Event;
-
+import com.blitting.lifecycle.IDisposable;
+import com.blitting.lifecycle.IValidatable;
 
 class Viewport extends AbstractViewport implements IValidatable {
 
