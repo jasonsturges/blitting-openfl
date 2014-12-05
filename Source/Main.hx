@@ -26,7 +26,7 @@ import blitting.display.Viewport;
 import blitting.display.Viewport3d;
 import blitting.effects.AbstractEffect;
 import blitting.effects.IEffect;
-import blitting.error.BlittingInvalidOperation;
+import blitting.error.BlittingOperationError;
 import blitting.error.BlittingRenderError;
 import blitting.event.EventPipeline;
 import blitting.lifecycle.IDisposable;
@@ -66,7 +66,7 @@ class Main extends Viewport {
             AbstractViewport,
             BitmapRenderer,
             Blitting,
-            BlittingInvalidOperation,
+            BlittingOperationError,
             BlittingRenderError,
             BufferedViewport,
             CallLater,

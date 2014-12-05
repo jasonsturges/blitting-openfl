@@ -1,5 +1,5 @@
 package blitting.error;
-class BlittingInvalidOperation {
+class BlittingOperationError {
     public function new() {
     }
 }
