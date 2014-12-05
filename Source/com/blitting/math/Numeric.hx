@@ -21,14 +21,14 @@ class Numeric {
     }
 
     /**
-     * Check equality of two Floats.  Return true if both Floats are NaN.
+     * Check equality of two `Floats`.  Return true if both Floats are NaN.
      */
     public static function equalsFloat(num1:Float, num2:Float):Bool {
         return ((Math.isNaN(num1) && Math.isNaN(num2)) || (num1 == num2));
     }
 
     /**
-     * Format a Float with thousands separator
+     * Format a `Float` with thousands separator
      *
      * Formats the characteristic, leaving the mantissa.
      */
@@ -44,7 +44,7 @@ class Numeric {
     }
 
     /**
-     * Convert a Float to a string of a specified length padded by zeroes.
+     * Convert a `Float` to a `String` of a specified length padded by zeroes.
      */
     public static function getPaddedFloat(value:Float, length:Int):String {
         // TODO: Determine if (""+value) is fastest conversion to string.
@@ -66,7 +66,7 @@ class Numeric {
     //}
 
     /**
-     * Get a random Float where min &lt;= n &lt; max
+     * Get a random `Float` where min &lt;= n &lt; max
      */
     public static function randomFloat(min:Float = 0, max:Float = 1, precision:Int = -1):Float {
         min = (!Math.isNaN(min)) ? (min) : (0);
@@ -82,26 +82,26 @@ class Numeric {
     }
 
     /**
-     * Utility to deal with roundoff errors of floating point Floats.
+     * Utility to manage roundoff errors of floating point numbers.
      *
      * http://kb2.adobe.com/cps/139/tn_13989.html
+     *
+     * Examples:
+     *
+     * ```haxe
+     *    trace(0.9 - 1); // -0.09999999999999998
+     *
+     *    trace(Numeric.roundDecimal(0.9 - 1, 1)); // -0.1
+     *    trace(Numeric.roundDecimal(0.9 - 1, 2)); // -0.1
+     *
+     *    trace(Numeric.roundDecimal(0.9 - 1.123, 1)); // -0.2
+     *    trace(Numeric.roundDecimal(0.9 - 1.123, 2)); // -0.22
+     *    trace(Numeric.roundDecimal(0.9 - 1.123, 3)); // -0.223
+     * ```
      *
      * @param n Float to be rounded.
      * @param precision Decimal places.
      * @return Rounded Float
-     *
-     * example
-     *
-     * <listing version="3.0">
-     *    trace(0.9 - 1); // -0.09999999999999998
-     *
-     *    trace(MathUtil.roundDecimal(0.9 - 1, 1)); // -0.1
-     *    trace(MathUtil.roundDecimal(0.9 - 1, 2)); // -0.1
-     *
-     *    trace(MathUtil.roundDecimal(0.9 - 1.123, 1)); // -0.2
-     *    trace(MathUtil.roundDecimal(0.9 - 1.123, 2)); // -0.22
-     *    trace(MathUtil.roundDecimal(0.9 - 1.123, 3)); // -0.223
-     * </listing>
      */
     public static function roundDecimal(n:Float, precision:Float):Float {
         var factor:Float = Math.pow(10, precision);
@@ -109,13 +109,14 @@ class Numeric {
     }
 
     /**
-     * Round a Float to the nearest (n).
+     * Round a `Float` to the nearest (n).
      *
      * Example:
      *
-     *        roundToNearest(.25, 19.95)   = 20
-     *      roundToNearest(50, 1275)     = 1300
-     *
+     * ```haxe
+     *    roundToNearest(.25, 19.95)   = 20
+     *    roundToNearest(50, 1275)     = 1300
+     * ```
      */
     public static function roundToNearest(roundTo:Float, value:Float):Float {
         return Math.round(value / roundTo) * roundTo;
