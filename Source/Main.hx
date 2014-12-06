@@ -49,6 +49,7 @@ import blitting.net.AbstractSocketService;
 import blitting.net.XmlService;
 import blitting.time.CallLater;
 import blitting.time.CountdownTimer;
+import blitting.time.DateUtil;
 import blitting.time.RandomTimer;
 
 class Main extends Viewport {
@@ -102,12 +103,14 @@ class Main extends Viewport {
             ResizableViewport,
             Statistics,
             TimeSpan,
+            DateUtil,
             UUID,
             ValidationType,
             Viewport,
             Viewport3d,
             XmlService
         ];
+
     }
 
 }
