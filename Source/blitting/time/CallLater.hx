@@ -2,6 +2,9 @@ package blitting.time;
 import openfl.events.TimerEvent;
 import openfl.utils.Timer;
 
+/**
+    Setup a timer to call a handler once at a later time.
+**/
 class CallLater {
 
 //------------------------------
