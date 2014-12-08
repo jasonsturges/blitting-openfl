@@ -5,4 +5,4 @@ Blitting for OpenFL is a port of the Flash Blitting engine written in Haxe enabl
 
 ####Licence
 
-MIT, see [LICENCE.md](LICENCE.md)
+MIT, see [LICENSE.md](LICENSE.md)
