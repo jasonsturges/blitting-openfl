@@ -36,7 +36,6 @@ class Blitting extends EventDispatcher implements ISingleton<Blitting> {
     }
 
     private function frameConstructedHandler(event:Event):Void {
-        trace("enter frame");
     }
 
 
