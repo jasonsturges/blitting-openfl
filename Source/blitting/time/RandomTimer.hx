@@ -55,12 +55,8 @@ class RandomTimer extends Timer {
     }
 
     /**
-     * start
-     *
-     * <p>
      * Start the timer.  As the timer runs, random
      * delay periods will be set on each timer event.
-     * </p>
      */
     override public function start():Void {
         delay = nextDelay();
@@ -92,9 +88,10 @@ class RandomTimer extends Timer {
      * event handling without directly assigned.
      *
      * Example:
-     * <pre><code>
+     *
+     * ```haxe
      * public class FunctionTimer extends RandomTimer {
-     *     private var _functions:Vector.&lt;Function&gt; = new &lt;Function&gt;[];
+     *     private var _functions:Vector.<Function> = new <Function>[];
      *
      *     public function addFunction(f:Function):void {
      *         _functions.push(f);
@@ -108,8 +105,9 @@ class RandomTimer extends Timer {
      *         }
      *     }
      * }
-     * </code></pre>
+     * ```
      */
+    @:dox(show)
     private function timerHandler(event:TimerEvent):Void {
         _count++;
 
