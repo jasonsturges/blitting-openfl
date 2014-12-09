@@ -1,7 +1,10 @@
 package blitting.display;
 
 import flash.Lib;
+import openfl.events.Event;
 import openfl.geom.Rectangle;
+import blitting.core.Blitting;
+import blitting.core.RenderType;
 import blitting.lifecycle.IRenderable;
 
 /**
@@ -53,11 +56,11 @@ class RenderedViewport extends Viewport implements IRenderable {
     /**
      * Render type / mode of rending.
      */
-    public var renderType:String;
+    public var renderType:RenderType;
 
     /**
-     * Total time elapsed of viewport, in milliseconds.
-     */
+        Total time elapsed of viewport, in milliseconds.
+    **/
     private var _runtime:Int;
 
     public var runtime (default, null):Int;
@@ -67,8 +70,8 @@ class RenderedViewport extends Viewport implements IRenderable {
     }
 
     /**
-     * Total time elapsed of viewport, in milliseconds.
-     */
+        Time since last frame render
+    **/
     private var _deltaTime:Int;
 
     public var deltaTime (default, null):Int;
@@ -82,8 +85,28 @@ class RenderedViewport extends Viewport implements IRenderable {
     //  lifecycle
     //------------------------------
 
-    public function new() {
+    public function new(frameRate:Float = 60) {
         super();
+
+        this.frameRate = frameRate;
+    }
+
+    override public function initialize():Void {
+        super.initialize();
+
+        renderType = RenderType.OnInvalidation;
+        _frameNumber = 0;
+        _frameRate = 60;
+        _runtime = _deltaTime = Lib.getTimer();
+    }
+
+    override private function addedToStageHandler(event:Event):Void {
+        super.addedToStageHandler(event);
+
+        if (renderType == RenderType.Continuous)
+            Blitting.getInstance().addRenderer(this, RenderType.Continuous);
+
+        invalidate();
     }
 
     /**
