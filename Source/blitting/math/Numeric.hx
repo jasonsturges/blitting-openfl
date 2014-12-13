@@ -134,4 +134,18 @@ class Numeric {
         return Math.round(value / roundTo) * roundTo;
     }
 
+    /**
+     * Round a number to an even number.
+     *
+     * Example:
+     *
+     *     Numeric.roundEven(1); // 0
+     *     Numeric.roundEven(2); // 2
+     *     Numeric.roundEven(3); // 2
+     *     Numeric.roundEven(4); // 4
+     */
+    public static function roundEven(n:Int):Int {
+        return n & 0xfffe;
+    }
+
 }
