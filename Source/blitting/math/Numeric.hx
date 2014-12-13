@@ -30,20 +30,12 @@ class Numeric {
     /**
      * Whether a number is odd value.
      *
-     * If floating point value is passed, only the characteristic
-     * is evaluated (ie: whole number left of the decimal).
-     *
      * Example:
      *
      *     Numeric.isOdd(1); // true
      *     Numeric.isOdd(2); // false
-     *
-     *     Numeric.isOdd(1.1); // true
-     *     Numeric.isOdd(1.2); // true
-     *     Numeric.isOdd(2.1); // false
-     *     Numeric.isOdd(2.2); // false
      */
-    public static function isOdd(n:Float):Bool {
+    public static function isOdd(n:Int):Bool {
         return ((n & 1) == 1);
     }
 
