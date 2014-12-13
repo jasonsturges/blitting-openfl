@@ -40,6 +40,18 @@ class Numeric {
     }
 
     /**
+     * Whether a number is even value.
+     *
+     * Example:
+     *
+     *     Numeric.isEven(1); // false
+     *     Numeric.isEven(2); // true
+     */
+    public static function isEven(n:Int):Bool {
+        return ((n & 1) == 0);
+    }
+
+    /**
      * Format a `Float` with thousands separator
      *
      * Formats the characteristic, leaving the mantissa.
