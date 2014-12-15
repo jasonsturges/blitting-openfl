@@ -3,7 +3,7 @@
   "url": "http://api.blitting.com",
   "license": "MIT",
   "tags": ["openfl"],
-  "description": "Rendering and lifecycle engines for OpenFL",
+  "description": "Rendering engine and lifecycle pipelines for OpenFL",
   "version": "1.0.0",
   "releasenote": "Initial import to haxelib.",
   "contributors": [ "jasonsturges" ],
