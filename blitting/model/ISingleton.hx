@@ -1,0 +1,5 @@
+package
+
+interface ISingleton<T> {
+
+}
