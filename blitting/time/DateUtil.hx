@@ -1,4 +1,5 @@
-package
+package blitting.time;
+
 class DateUtil {
 
     /**

@@ -1,4 +1,4 @@
-package
+package blitting.display;
 
 import openfl.geom.Point;
 import openfl.geom.Rectangle;

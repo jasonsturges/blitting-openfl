@@ -1,3 +1,4 @@
-package
+package blitting.controls;
+
 interface IControl {
 }

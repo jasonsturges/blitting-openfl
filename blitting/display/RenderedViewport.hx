@@ -1,4 +1,4 @@
-package
+package blitting.display;
 
 import flash.Lib;
 import openfl.events.Event;

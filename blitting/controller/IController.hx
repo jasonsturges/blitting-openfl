@@ -1,3 +1,4 @@
-package
+package blitting.controller;
+
 interface IController {
 }

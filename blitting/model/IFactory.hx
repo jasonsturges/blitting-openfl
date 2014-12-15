@@ -1,4 +1,4 @@
-package
+package blitting.model;
 
 interface IFactory<T> {
 

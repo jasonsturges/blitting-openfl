@@ -1,4 +1,4 @@
-package
+package blitting.event;
 
 import openfl.events.EventDispatcher;
 

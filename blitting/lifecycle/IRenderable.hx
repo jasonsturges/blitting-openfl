@@ -1,4 +1,4 @@
-package
+package blitting.lifecycle;
 
 import openfl.geom.Rectangle;
 

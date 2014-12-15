@@ -1,4 +1,4 @@
-package
+package blitting.core;
 
 import flash.Lib;
 import openfl.display.DisplayObject;

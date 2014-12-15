@@ -1,4 +1,4 @@
-package
+package blitting.display;
 
 import openfl.display.DisplayObject;
 import openfl.display.StageAlign;

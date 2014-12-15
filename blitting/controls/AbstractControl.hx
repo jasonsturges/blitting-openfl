@@ -1,4 +1,4 @@
-package
+package blitting.controls;
 
 class AbstractControl implements IControl {
 

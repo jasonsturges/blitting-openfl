@@ -1,4 +1,4 @@
-package
+package blitting.display;
 
 import openfl.display.Sprite;
 import openfl.geom.Point;

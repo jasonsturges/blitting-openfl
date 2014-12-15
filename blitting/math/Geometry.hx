@@ -1,4 +1,5 @@
-package
+package blitting.math;
+
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
 

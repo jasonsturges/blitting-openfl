@@ -1,4 +1,5 @@
-package
+package blitting.time;
+
 import blitting.lifecycle.IDisposable;
 import openfl.events.TimerEvent;
 import openfl.utils.Timer;

@@ -1,4 +1,4 @@
-package
+package blitting.constant;
 
 @:enum
 abstract ColorPalette(UInt) {
