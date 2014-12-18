@@ -16,7 +16,7 @@ of the [Blitting](https://github.com/jasonsturges/blitting) ActionScript library
 
 Here are a few starting points:
 
-* [API Reference](http://api.blitting.com)
+* [API Reference](http://jasonsturges.github.io/blitting-openfl/)
 
 
 ### Releases
