@@ -1,8 +1,10 @@
 # Haxe exports
-Export
+Export/
+bin/
 
 # Documentation
-Documentation
+[dD]ocumentation/
+haxedoc.xml
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 ## Directory-based project format
@@ -17,3 +19,6 @@ Documentation
 .DS_Store
 ## Windows
 Thumbs.db
+
+# Temporary files
+temp/
