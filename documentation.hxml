@@ -1,0 +1,16 @@
+# Generate single haxedoc.xml for haxelib
+
+# TODO: Resolve --no-output blitting, openfl, and lime issues.
+# Until resolved, generate as3 in a temp directory.
+
+-xml haxedoc.xml
+-D display
+LinkageLibrary
+-lib lime
+-lib openfl
+-as3 temp
+
+--next
+
+-cmd haxelib run dox -i haxedoc.xml -in blitting -o Documentation
+
