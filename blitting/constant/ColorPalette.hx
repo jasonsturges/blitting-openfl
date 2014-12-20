@@ -9,6 +9,9 @@
 */
 package blitting.constant;
 
+/**
+    X11 Color Palette.
+**/
 class ColorPalette {
 
     /** <pre style='background-color: #f0f8ff; width: 350px; padding: 10px;'>aliceBlue #f0f8ff</pre> **/
