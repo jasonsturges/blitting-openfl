@@ -24,15 +24,11 @@ Here are a few starting points:
 * beta, coming soon
 
 
-### Generating ASDoc Documentation
+### Generating Dox Documentation
 
-To generate documentation, first build target appending the `-xml` argument, such as :
+To generate documentation using dox, execute:
 
-    openfl build flash -xml
-
-Then, run dox:
-
-    haxelib run dox -i Export/flash/ -o Documentation/ -in blitting
+    haxe documentation.hxml
 
 
 ## Licence
