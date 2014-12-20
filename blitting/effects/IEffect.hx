@@ -7,7 +7,7 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.display;
+package blitting.effects;
 
 interface IEffect {
 }
