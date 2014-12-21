@@ -9,5 +9,5 @@
 */
 package blitting.controller;
 
-interface IController {
+interface IController<T> {
 }
