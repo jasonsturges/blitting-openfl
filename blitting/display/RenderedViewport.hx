@@ -33,6 +33,12 @@ class RenderedViewport extends Viewport implements IRenderable {
     //------------------------------
 
     /**
+     * Rendering engine.
+     */
+    public static var blitting:Blitting;
+
+
+    /**
      * Current (total) frame number.
      */
     private var _frameNumber:UInt;
@@ -97,6 +103,8 @@ class RenderedViewport extends Viewport implements IRenderable {
     public function new(frameRate:Float = 60) {
         super();
 
+        blitting = Blitting.getInstance();
+
         this.frameRate = frameRate;
     }
 
@@ -116,6 +124,10 @@ class RenderedViewport extends Viewport implements IRenderable {
             Blitting.getInstance().addRenderer(this, RenderType.Continuous);
 
         invalidate();
+    }
+
+    public function changeRenderType(renderType:RenderType):Void {
+        blitting.changeRenderer(this, renderType);
     }
 
     /**

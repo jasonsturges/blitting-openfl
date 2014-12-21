@@ -16,7 +16,8 @@ import openfl.events.Event;
 import blitting.lifecycle.IDisposable;
 import blitting.lifecycle.IValidatable;
 
-class Viewport extends AbstractViewport implements IValidatable {
+class Viewport extends AbstractViewport
+    implements IValidatable {
 
     //------------------------------
     //  model
@@ -48,9 +49,7 @@ class Viewport extends AbstractViewport implements IValidatable {
 
         invalidated = false;
         mouseEnabled = mouseChildren = tabChildren = false;
-        // TODO: if flash or other?
-//        focusRect = false;
-//        focusRect = mouseEnabled = mouseChildren = tabEnabled = tabChildren = false;
+        //focusRect = tabEnabled  = false;
 
         addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
     }
@@ -59,6 +58,9 @@ class Viewport extends AbstractViewport implements IValidatable {
      * autoOrientation
      */
     public function autoOrientation():Void {
+        if (stage == null)
+            throw "autoOrientation may only be called on a root viewport with access to the stage.";
+
         stage.scaleMode = StageScaleMode.NO_SCALE;
         stage.align = StageAlign.TOP_LEFT;
     }
