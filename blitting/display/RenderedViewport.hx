@@ -9,6 +9,9 @@
 */
 package blitting.display;
 
+import blitting.core.RenderType;
+import blitting.core.RenderType;
+import blitting.core.ValidationType;
 import flash.Lib;
 import openfl.events.Event;
 import openfl.geom.Rectangle;
@@ -26,7 +29,8 @@ import blitting.lifecycle.IRenderable;
  *    <li>post-render</li>
  * </ul>
  */
-class RenderedViewport extends Viewport implements IRenderable {
+class RenderedViewport extends Viewport
+    implements IRenderable {
 
     //------------------------------
     //  model
@@ -113,7 +117,6 @@ class RenderedViewport extends Viewport implements IRenderable {
 
         renderType = RenderType.OnInvalidation;
         _frameNumber = 0;
-        _frameRate = 60;
         _runtime = _deltaTime = Lib.getTimer();
     }
 
@@ -121,13 +124,29 @@ class RenderedViewport extends Viewport implements IRenderable {
         super.addedToStageHandler(event);
 
         if (renderType == RenderType.Continuous)
-            Blitting.getInstance().addRenderer(this, RenderType.Continuous);
+            blitting.addRenderer(this, renderType);
 
         invalidate();
     }
 
     public function changeRenderType(renderType:RenderType):Void {
         blitting.changeRenderer(this, renderType);
+    }
+
+    override public function invalidate():Void {
+        super.invalidate();
+
+        blitting.addInvalidation(this, ValidationType.Self);
+
+        if (renderType == RenderType.OnInvalidation)
+            blitting.addRenderer(this, RenderType.Once);
+    }
+
+    override public function validate():Void {
+        super.validate();
+
+        if (stage != null)
+            stage.frameRate = frameRate;
     }
 
     /**
@@ -150,6 +169,18 @@ class RenderedViewport extends Viewport implements IRenderable {
      * post-render
      */
     public function postrender(changeRect:Rectangle = null):Void {
+    }
+
+    override private function removedFromStageHandler(event:Event):Void {
+        super.removedFromStageHandler(event);
+
+        blitting.removeRenderer(this);
+    }
+
+    override public function dispose():Void {
+        super.dispose();
+
+        blitting.removeRenderer(this);
     }
 
 }
