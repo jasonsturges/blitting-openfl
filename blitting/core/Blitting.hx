@@ -10,20 +10,21 @@
 package blitting.core;
 
 import flash.Lib;
-import openfl.display.DisplayObject;
 import openfl.display.Shape;
 import openfl.events.Event;
 import openfl.events.EventDispatcher;
+import blitting.controller.AbstractController;
+import blitting.core.RenderType;
 import blitting.display.IRenderer;
 import blitting.lifecycle.IProcess;
-import blitting.lifecycle.IRenderable;
 import blitting.lifecycle.IResizable;
+import blitting.lifecycle.IRenderable;
 import blitting.lifecycle.IValidatable;
 import blitting.model.ISingleton;
 
-class Blitting extends EventDispatcher
-implements ISingleton<Blitting>
-implements IProcess {
+class Blitting extends AbstractController<Blitting>
+    implements ISingleton<Blitting>
+    implements IProcess {
 
     //------------------------------
     //  singleton instance
@@ -47,7 +48,7 @@ implements IProcess {
     //  model
     //------------------------------
 
-    private var layoutPipeline:Map<IResizable, DisplayObject>;
+    private var layoutPipeline:Map<IResizable, Bool>;
 
     private var renderPipeline:Map<IRenderable, RenderType>;
 
@@ -62,6 +63,17 @@ implements IProcess {
         _shapeRenderer.filters = [];
 
         return _shapeRenderer;
+    }
+
+    /**
+     * Current (total) frame number.
+     */
+    private var _frameNumber:UInt;
+
+    public var frameNumber (default, null):UInt;
+
+    public function get_frameNumber():UInt {
+        return _frameNumber;
     }
 
     /**
@@ -86,17 +98,6 @@ implements IProcess {
         return Lib.getTimer() - _deltaTime;
     }
 
-    /**
-     * Current (total) frame number.
-     */
-    private var _frameNumber:UInt;
-
-    public var frameNumber (default, null):UInt;
-
-    public function get_frameNumber():UInt {
-        return _frameNumber;
-    }
-
 
     //------------------------------
     //  lifecycle
@@ -106,7 +107,7 @@ implements IProcess {
         super();
 
         // instantiate pipelines
-        layoutPipeline = new Map<IResizable, DisplayObject>();
+        layoutPipeline = new Map<IResizable, Bool>();
         renderPipeline = new Map<IRenderable, RenderType>();
         validationPipeline = new Map<IValidatable, ValidationType>();
 
@@ -132,6 +133,10 @@ implements IProcess {
         validationPipeline.set(validatable, type);
     }
 
+    public function addLayout(resizable:IResizable):Void {
+        layoutPipeline.set(resizable, true);
+    }
+
     public function addRenderer(renderer:IRenderable, ?renderType:RenderType):Void {
         if (renderType == null)
             renderType = RenderType.Continuous;
@@ -148,15 +153,31 @@ implements IProcess {
         }
     }
 
+    public function changeRenderer(renderer:IRenderable, renderType:RenderType):Void {
+        renderPipeline.set(renderer, renderType);
+    }
+
     private function frameConstructedHandler(event:Event):Void {
-        trace("frame");
-        trace("  " + Lambda.count(renderPipeline));
         ++_frameNumber;
 
-        for (renderer in renderPipeline.keys()) {
-            renderer.prerender();
+        // validation
+        for (validatable in validationPipeline.keys()) {
+            validatable.validate();
+            validationPipeline.remove(validatable);
         }
 
+        // layout
+        for (resizable in layoutPipeline.keys()) {
+            resizable.layout();
+            layoutPipeline.remove(resizable);
+        }
+
+        // pre-render
+        for (prerenderer in renderPipeline.keys()) {
+            prerenderer.prerender();
+        }
+
+        // render
         for (renderer in renderPipeline.keys()) {
             renderer.render();
         }
@@ -169,6 +190,8 @@ implements IProcess {
             if (renderPipeline[renderer] == RenderType.Once)
                 renderPipeline.remove(renderer);
         }
+
+        _deltaTime = Lib.getTimer();
     }
 
     public function removeRenderer(renderer:IRenderable):Void {
@@ -176,6 +199,8 @@ implements IProcess {
     }
 
     public function stop():Void {
+        _shapeRenderer.removeEventListener(Event.ENTER_FRAME, frameConstructedHandler);
+        _shapeRenderer.removeEventListener(Event.RENDER, exitFrameHandler);
     }
 
     public function dispose():Void {
