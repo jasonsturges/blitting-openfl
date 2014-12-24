@@ -9,5 +9,10 @@
 */
 package blitting.display;
 
+import openfl.display.BitmapData;
+
 interface IBitmapRenderer {
+
+    function render(bitmapData:BitmapData):Void;
+
 }
