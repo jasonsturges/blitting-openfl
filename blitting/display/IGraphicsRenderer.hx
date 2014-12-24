@@ -9,5 +9,11 @@
 */
 package blitting.display;
 
+import openfl.display.DisplayObject;
+import openfl.display.Graphics;
+
 interface IGraphicsRenderer {
+
+    function render(graphics:Graphics, ?displayObject:DisplayObject):Void;
+
 }
