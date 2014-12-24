@@ -9,5 +9,10 @@
 */
 package blitting.display;
 
+import openfl.display3D.Context3D;
+
 interface IContext3dRenderer {
+
+    function renderer(context3d:Context3D):Void;
+
 }
