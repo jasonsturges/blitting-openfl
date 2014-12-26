@@ -81,7 +81,6 @@ class ResizableViewport extends RenderedViewport
         if (stage.allowsFullScreen) {
             stage.displayState = StageDisplayState.FULL_SCREEN;
         }
-
     }
 
     /**
