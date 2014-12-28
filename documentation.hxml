@@ -9,6 +9,7 @@ LinkageLibrary
 -lib lime
 -lib openfl
 -as3 temp
+-swf-version 11.3
 
 --next
 
