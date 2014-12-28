@@ -9,7 +9,20 @@
 */
 package blitting.display;
 
-class AbstractRenderer {
+import blitting.lifecycle.IDisposable;
+import blitting.lifecycle.IInitializable;
+
+class AbstractRenderer
+    implements IInitializable
+    implements IDisposable {
+
     public function new() {
     }
+
+    public function initialize():Void {
+    }
+
+    public function dispose():Void {
+    }
+
 }
