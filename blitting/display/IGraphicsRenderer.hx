@@ -11,8 +11,9 @@ package blitting.display;
 
 import openfl.display.DisplayObject;
 import openfl.display.Graphics;
+import blitting.display.IRenderer;
 
-interface IGraphicsRenderer {
+interface IGraphicsRenderer extends IRenderer {
 
     function render(graphics:Graphics, ?displayObject:DisplayObject):Void;
 

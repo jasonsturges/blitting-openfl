@@ -10,8 +10,9 @@
 package blitting.display;
 
 import openfl.display3D.Context3D;
+import blitting.display.IRenderer;
 
-interface IContext3dRenderer {
+interface IContext3dRenderer extends IRenderer {
 
     function renderer(context3d:Context3D):Void;
 
