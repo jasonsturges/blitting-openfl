@@ -35,7 +35,7 @@ class ObjectPool implements ISingleton<ObjectPool> {
 
     private var pool:Map<String, Array<Dynamic>>;
 
-    private var MAX_POOL_SIZE:UInt = 64;
+    private var MAX_POOL_SIZE:Int = 64;
 
 
     //------------------------------
