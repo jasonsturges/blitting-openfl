@@ -39,7 +39,7 @@ class RenderedViewport extends Viewport
     /**
      * Rendering engine.
      */
-    public static var blitting:Blitting;
+    public static var blitting:Blitting = Blitting.getInstance();
 
 
     /**
@@ -106,8 +106,6 @@ class RenderedViewport extends Viewport
 
     public function new(frameRate:Float = 60) {
         super();
-
-        blitting = Blitting.getInstance();
 
         this.frameRate = frameRate;
     }
