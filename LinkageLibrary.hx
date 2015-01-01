@@ -42,7 +42,6 @@ import blitting.model.Color;
 import blitting.model.IFactory;
 import blitting.model.ISingleton;
 import blitting.model.ObjectPool;
-import blitting.model.UUID;
 import blitting.net.AbstractService;
 import blitting.net.AbstractSocketService;
 import blitting.net.XmlService;
