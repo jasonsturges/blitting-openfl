@@ -19,11 +19,7 @@ class ObjectPool implements ISingleton<ObjectPool> {
     //  singleton instance
     //------------------------------
 
-    private static var instance:ObjectPool = new ObjectPool();
-
-    public static function getInstance():ObjectPool {
-        return instance;
-    }
+    public static var instance(default, null):ObjectPool = new ObjectPool();
 
 
     //------------------------------
