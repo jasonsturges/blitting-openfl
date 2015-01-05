@@ -9,9 +9,19 @@
 */
 package blitting.controls;
 
-class AbstractControl implements IControl {
+import blitting.core.RenderType;
+import blitting.display.ResizableViewport;
+
+class AbstractControl extends ResizableViewport implements IControl {
+
+    //------------------------------
+    //  lifecycle
+    //------------------------------
 
     public function new() {
+        super();
+
+        renderType = RenderType.OnInvalidation;
     }
 
 }
