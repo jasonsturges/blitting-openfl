@@ -23,13 +23,69 @@ class BufferedViewport extends ResizableViewport {
     //  model
     //------------------------------
 
-    private var bitmap:Bitmap;
-    private var bitmapData:BitmapData;
-    private var fillColor:UInt;
-    private var pixelSnapping:PixelSnapping;
-    private var scaleOnResize:Bool;
-    private var smoothing:Bool;
-    private var transparent:Bool;
+    @:isVar private var bitmap(get, set):Bitmap;
+    @:isVar private var bitmapData(get, set):BitmapData;
+    @:isVar public var fillColor(get, set):UInt;
+    @:isVar public var pixelSnapping(get, set):PixelSnapping;
+    @:isVar public var scaleOnResize(get, set):Bool;
+    @:isVar public var smoothing(get, set):Bool;
+    @:isVar public var transparent(get, set):Bool;
+
+
+    inline private function get_bitmap():Bitmap {
+        return bitmap;
+    }
+    inline private function set_bitmap(value:Bitmap):Bitmap {
+        return bitmap = value;
+    }
+
+    private function get_bitmapData():BitmapData {
+        return bitmapData;
+    }
+    private function set_bitmapData(value:BitmapData):BitmapData {
+        return bitmapData = value;
+    }
+
+    public function get_fillColor():UInt {
+        return fillColor;
+    }
+    public function set_fillColor(value:UInt):UInt {
+        return fillColor = value;
+    }
+
+    public function get_pixelSnapping():PixelSnapping {
+        return pixelSnapping;
+    }
+    public function set_pixelSnapping(value:PixelSnapping):PixelSnapping {
+        if (pixelSnapping != value)
+            invalidate();
+
+        return pixelSnapping = value;
+    }
+
+    public function get_scaleOnResize():Bool {
+        return scaleOnResize;
+    }
+    public function set_scaleOnResize(value:Bool):Bool {
+        return scaleOnResize = value;
+    }
+
+    public function get_smoothing():Bool {
+        return smoothing;
+    }
+    public function set_smoothing(value:Bool):Bool {
+        if (smoothing != value)
+            invalidate();
+
+        return smoothing = value;
+    }
+
+    public function get_transparent():Bool {
+        return transparent;
+    }
+    public function set_transparent(value:Bool):Bool {
+        return transparent = value;
+    }
 
 
     //------------------------------
