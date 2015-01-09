@@ -12,7 +12,13 @@ package blitting.controls;
 import blitting.core.RenderType;
 import blitting.display.ResizableViewport;
 
-class AbstractControl extends ResizableViewport implements IControl {
+class AbstractControl<T> extends ResizableViewport implements IControl {
+
+    //------------------------------
+    //  model
+    //------------------------------
+
+    public var value:T;
 
     //------------------------------
     //  lifecycle
@@ -22,6 +28,12 @@ class AbstractControl extends ResizableViewport implements IControl {
         super();
 
         renderType = RenderType.OnInvalidation;
+    }
+
+    override public function initialize():Void {
+        super.initialize();
+
+        value = null;
     }
 
 }
