@@ -18,7 +18,19 @@ class AbstractControl<T> extends ResizableViewport implements IControl {
     //  model
     //------------------------------
 
-    public var value:T;
+    @:isVar private var value(get, set):T;
+
+    public function get_value():T {
+        return value;
+    }
+
+    public function set_value(value:T):T {
+        if (this.value != value)
+            invalidate();
+
+        return this.value = value;
+    }
+
 
     //------------------------------
     //  lifecycle
