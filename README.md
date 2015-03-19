@@ -33,6 +33,8 @@ To generate documentation using dox, execute:
 
 ## Licence
 
+This project is free, open-source software under the [MIT license](LICENSE.md).
+
 Copyright 2015 [Jason Sturges](http://jasonsturges.com)
 
-This project is free, open-source software under the [MIT license](LICENSE.md).
+
