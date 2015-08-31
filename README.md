@@ -21,7 +21,8 @@ Here are a few starting points:
 
 ### Releases
 
-* beta, coming soon
+* v0.9 beta on August 31, 2015
+- Initial import to haxelib.
 
 
 ### Generating Dox Documentation

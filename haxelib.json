@@ -1,11 +1,13 @@
 {
   "name": "blitting",
-  "url": "http://api.blitting.com",
+  "url": "https://github.com/jasonsturges/blitting-openfl",
   "license": "MIT",
   "tags": ["openfl"],
   "description": "Rendering engine and lifecycle pipelines for OpenFL",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "releasenote": "Initial import to haxelib.",
   "contributors": [ "jasonsturges" ],
-  "dependencies": {}
+  "dependencies": {
+    "openfl": ""
+  }
 }
