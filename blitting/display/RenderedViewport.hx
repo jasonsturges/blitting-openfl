@@ -47,7 +47,7 @@ class RenderedViewport extends Viewport
      */
     private var _frameNumber:UInt;
 
-    public var frameNumber (default, null):UInt;
+    public var frameNumber (get, null):UInt;
 
     public function get_frameNumber():UInt {
         return _frameNumber;
@@ -82,7 +82,7 @@ class RenderedViewport extends Viewport
     **/
     private var _runtime:Int;
 
-    public var runtime (default, null):Int;
+    public var runtime (get, null):Int;
 
     public function get_runtime():Int {
         return Lib.getTimer() - _runtime;
@@ -93,7 +93,7 @@ class RenderedViewport extends Viewport
     **/
     private var _deltaTime:Int;
 
-    public var deltaTime (default, null):Int;
+    public var deltaTime (get, null):Int;
 
     public function get_deltaTime():Int {
         return Lib.getTimer() - _deltaTime;

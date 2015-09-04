@@ -49,7 +49,7 @@ class Blitting extends AbstractController<Blitting>
 
     private var _shapeRenderer:Shape;
 
-    public var shapeRenderer(default, null):Shape;
+    public var shapeRenderer(get, null):Shape;
 
     public function get_shapeRenderer():Shape {
         _shapeRenderer.graphics.clear();
@@ -63,7 +63,7 @@ class Blitting extends AbstractController<Blitting>
      */
     private var _frameNumber:UInt;
 
-    public var frameNumber (default, null):UInt;
+    public var frameNumber (get, null):UInt;
 
     public function get_frameNumber():UInt {
         return _frameNumber;
@@ -74,7 +74,7 @@ class Blitting extends AbstractController<Blitting>
     **/
     private var _runtime:Int;
 
-    public var runtime (default, null):Int;
+    public var runtime (get, null):Int;
 
     public function get_runtime():Int {
         return Lib.getTimer() - _runtime;
@@ -85,7 +85,7 @@ class Blitting extends AbstractController<Blitting>
     **/
     private var _deltaTime:Int;
 
-    public var deltaTime (default, null):Int;
+    public var deltaTime (get, null):Int;
 
     public function get_deltaTime():Int {
         return Lib.getTimer() - _deltaTime;
