@@ -9,15 +9,15 @@
 */
 package blitting.display;
 
-import blitting.core.RenderType;
-import blitting.core.RenderType;
-import blitting.core.ValidationType;
-import flash.Lib;
 import openfl.events.Event;
 import openfl.geom.Rectangle;
+import openfl.Lib;
+
 import blitting.core.Blitting;
 import blitting.core.RenderType;
+import blitting.core.ValidationType;
 import blitting.lifecycle.IRenderable;
+
 
 /**
  * Extends Viewport to include BlittingEngine

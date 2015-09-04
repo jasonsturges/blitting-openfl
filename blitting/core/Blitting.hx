@@ -9,13 +9,12 @@
 */
 package blitting.core;
 
-import flash.Lib;
 import openfl.display.Shape;
 import openfl.events.Event;
-import openfl.events.EventDispatcher;
+import openfl.Lib;
+
 import blitting.controller.AbstractController;
 import blitting.core.RenderType;
-import blitting.display.IRenderer;
 import blitting.lifecycle.IProcess;
 import blitting.lifecycle.IResizable;
 import blitting.lifecycle.IRenderable;
