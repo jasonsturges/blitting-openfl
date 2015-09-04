@@ -113,9 +113,20 @@ class Blitting extends AbstractController<Blitting>
     public function start():Void {
         _runtime = _deltaTime = Lib.getTimer();
 
-        // TODO: Blocked by GitHub issue blitting-openfl#3 and blitting-openfl#4
-        _shapeRenderer.addEventListener(Event.ENTER_FRAME, frameConstructedHandler);
-        _shapeRenderer.addEventListener(Event.RENDER, exitFrameHandler);
+        // TODO: Blocked by GitHub issue: Offstage event dispatching #418
+        //       https://github.com/openfl/openfl/issues/418
+        //
+        // Only Flash target receives off-stage events from _shapeRenderer.
+        // Consider using stage proxy.
+        //
+        // TODO: Blocked by GitHub issue: OpenFL event lifecycle missing stages #413
+        //       https://github.com/openfl/openfl/issues/413
+        //
+        // Implementation should pre-render and render on `Event.FRAME_CONSTRUCTED`,
+        // and post-render on `Event.EXIT_FRAME`.
+        //
+        // Alternate implementation here calls all rendering operations on `Event.ENTER_FRAME`.
+        _shapeRenderer.addEventListener(Event.ENTER_FRAME, frameHandler);
     }
 
     public function addInvalidation(validatable:IValidatable, ?type:ValidationType) {
@@ -149,7 +160,7 @@ class Blitting extends AbstractController<Blitting>
         renderPipeline.set(renderer, renderType);
     }
 
-    private function frameConstructedHandler(event:Event):Void {
+    private function frameHandler(event:Event):Void {
         ++_frameNumber;
 
         // validation
@@ -173,9 +184,8 @@ class Blitting extends AbstractController<Blitting>
         for (renderer in renderPipeline.keys()) {
             renderer.render();
         }
-    }
 
-    private function exitFrameHandler(event:Event):Void {
+        // postrender
         for (renderer in renderPipeline.keys()) {
             renderer.postrender();
 
@@ -191,8 +201,7 @@ class Blitting extends AbstractController<Blitting>
     }
 
     public function stop():Void {
-        _shapeRenderer.removeEventListener(Event.ENTER_FRAME, frameConstructedHandler);
-        _shapeRenderer.removeEventListener(Event.RENDER, exitFrameHandler);
+        _shapeRenderer.removeEventListener(Event.ENTER_FRAME, frameHandler);
     }
 
     public function dispose():Void {

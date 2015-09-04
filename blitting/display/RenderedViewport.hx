@@ -152,9 +152,6 @@ class RenderedViewport extends Viewport
      */
     public function prerender():Void {
         ++_frameNumber;
-
-        // Update time elapsed since last frame render.
-        _deltaTime = Lib.getTimer();
     }
 
     /**
@@ -167,6 +164,8 @@ class RenderedViewport extends Viewport
      * post-render
      */
     public function postrender(changeRect:Rectangle = null):Void {
+        // Update time elapsed since last frame render
+        _deltaTime = Lib.getTimer();
     }
 
     override private function removedFromStageHandler(event:Event):Void {
