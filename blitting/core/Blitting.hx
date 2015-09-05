@@ -29,7 +29,14 @@ class Blitting extends AbstractController<Blitting>
     //  singleton instance
     //------------------------------
 
-    public static var instance(default, null):Blitting = new Blitting();
+    public static var instance(get, null):Blitting;
+
+    private static function get_instance():Blitting {
+        if (instance == null)
+            instance = new Blitting();
+
+        return instance;
+    }
 
     public static function getRenderer():Shape {
         return Blitting.instance.shapeRenderer;

@@ -11,9 +11,25 @@ package blitting.event;
 
 import openfl.events.EventDispatcher;
 
-class EventPipeline extends EventDispatcher {
+class EventPipeline extends EventDispatcher implements ISingleton<EventPipeline> {
 
-    public static var instance(default, null):EventPipeline = new EventPipeline();
+    //------------------------------
+    //  singleton instance
+    //------------------------------
+
+    public static var instance(get, null):EventPipeline;
+
+    private static function get_instance():EventPipeline {
+        if (instance == null)
+            instance = new EventPipeline();
+
+        return instance;
+    }
+
+
+    //------------------------------
+    //  lifecycle
+    //------------------------------
 
     public function new() {
         super();
