@@ -22,7 +22,14 @@ class ResizableViewport extends RenderedViewport
     //  model
     //------------------------------
 
-    private static var blitting:Blitting = Blitting.instance;
+    /**
+     * Rendering engine.
+     */
+    public static var blitting(get, null):Blitting;
+
+    private static function get_blitting():Blitting {
+        return Blitting.instance;
+    }
 
     /**
      * Bind to full stage bounds.

@@ -39,8 +39,11 @@ class RenderedViewport extends Viewport
     /**
      * Rendering engine.
      */
-    public static var blitting:Blitting = Blitting.instance;
+    public static var blitting(get, null):Blitting;
 
+    private static function get_blitting():Blitting {
+        return Blitting.instance;
+    }
 
     /**
      * Current (total) frame number.
