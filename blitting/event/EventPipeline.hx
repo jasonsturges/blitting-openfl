@@ -11,6 +11,8 @@ package blitting.event;
 
 import openfl.events.EventDispatcher;
 
+import blitting.model.ISingleton;
+
 class EventPipeline extends EventDispatcher implements ISingleton<EventPipeline> {
 
     //------------------------------
