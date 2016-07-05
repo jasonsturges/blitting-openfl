@@ -32,7 +32,7 @@ To generate documentation using dox, execute:
     haxe documentation.hxml
 
 
-## Licence
+## License
 
 This project is free, open-source software under the [MIT license](LICENSE.md).
 
