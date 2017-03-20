@@ -32,7 +32,7 @@ class Context3dRenderer extends AbstractRenderer {
     //  lifecycle
     //------------------------------
 
-    public function Context3dRenderer() {
+    public function new() {
         super();
     }
 
