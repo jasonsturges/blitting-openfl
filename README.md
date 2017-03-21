@@ -21,6 +21,16 @@ To use a local copy as a development haxelib, clone this repo and link the sourc
  
      $ git clone https://github.com/jasonsturges/blitting-openfl.git
      $ haxelib dev blitting-openfl ./blitting-openfl
+     
+## Project Setup
+
+For inclusion into a Haxe project, add this library by updating your project.xml:
+
+    <project>
+        ...
+        <haxelib name="blitting-openfl" />
+        ...
+    </project>
 
 
 ### Where do I find more information?
