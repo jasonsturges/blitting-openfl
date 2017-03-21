@@ -11,6 +11,17 @@ for graphics, bitmap, and 3D rendering.  Through a core engine, pipelines optimi
 Blitting OpenFL is an [OpenFL](http://www.openfl.org/) port to the [Haxe](http://haxe.org/) programming language
 of the [Blitting](https://github.com/jasonsturges/blitting) ActionScript library.  ActionScript developers should use Blitting.
 
+## Installation
+
+This library can be installed through haxelib by executing:
+
+    $ haxelib install blitting
+    
+To use a local copy as a development haxelib, clone this repo and link the source directory by executing:
+ 
+     $ git clone https://github.com/jasonsturges/blitting-openfl.git
+     $ haxelib dev blitting-openfl ./blitting-openfl
+
 
 ### Where do I find more information?
 
@@ -21,8 +32,10 @@ Here are a few starting points:
 
 ### Releases
 
+* v.0.9.1 beta on March 21, 2017
+  - Rendering lifecycle, parity with blitting library 
 * v0.9 beta on August 31, 2015
-- Initial import to haxelib.
+  - Initial import to haxelib.
 
 
 ### Generating Dox Documentation
