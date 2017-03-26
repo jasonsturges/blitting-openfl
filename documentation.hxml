@@ -13,5 +13,4 @@ LinkageLibrary
 
 --next
 
--cmd haxelib run dox -i haxedoc.xml -in blitting -o Documentation
-
+-cmd haxelib run dox -i haxedoc.xml -in blitting -o docs
