@@ -12,23 +12,25 @@ package blitting.controls;
 import blitting.core.RenderType;
 import blitting.display.ResizableViewport;
 
-class AbstractControl<T> extends ResizableViewport implements IControl {
+class AbstractControl<T> extends ResizableViewport implements IControl<T> {
 
     //------------------------------
     //  model
     //------------------------------
 
-    @:isVar private var value(get, set):T;
+    private var _value:T;
+
+    public var value(get, set):T;
 
     public function get_value():T {
-        return value;
+        return _value;
     }
 
     public function set_value(value:T):T {
-        if (this.value != value)
+        if (_value != value)
             invalidate();
 
-        return this.value = value;
+        return _value = value;
     }
 
 

@@ -9,5 +9,10 @@
 */
 package blitting.controls;
 
-interface IControl {
+interface IControl<T> {
+
+    var value(get, set):T;
+    function get_value():T;
+    function set_value(value:T):T;
+
 }
