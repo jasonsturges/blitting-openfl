@@ -7,7 +7,7 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.time;
+package blitting.util;
 
 import blitting.lifecycle.IDisposable;
 import openfl.events.TimerEvent;
@@ -21,7 +21,7 @@ class CountdownTimer extends Timer implements IDisposable {
 
     private var _time:Float = 0;
 
-    public var time(get, set):Float;
+    public var util(get, set):Float;
 
     public function get_time():Float {
         return _time;
@@ -36,7 +36,7 @@ class CountdownTimer extends Timer implements IDisposable {
     //  lifecycle
     //------------------------------
 
-    public function new(time:Float = 0, delay:Float = 1000) {
+    public function new(util:Float = 0, delay:Float = 1000) {
         super(delay, repeatCount);
 
         if (!Math.isNaN(time))

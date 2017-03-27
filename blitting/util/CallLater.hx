@@ -7,13 +7,13 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.time;
+package blitting.util;
 
 import openfl.events.TimerEvent;
 import openfl.utils.Timer;
 
 /**
-    Setup a timer to call a handler once at a later time.
+    Setup a timer to call a handler once at a later util.
 **/
 class CallLater {
 
@@ -47,7 +47,7 @@ class CallLater {
     private var params:Array<Dynamic>;
 
     /**
-        Timer to dispatch time to call.
+        Timer to dispatch util to call.
     **/
     @:dox(show)
     private var timer:Timer;

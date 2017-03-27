@@ -7,7 +7,7 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.time;
+package blitting.util;
 
 import openfl.events.TimerEvent;
 import openfl.utils.Timer;
