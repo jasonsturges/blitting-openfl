@@ -7,7 +7,7 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.display;
+package blitting.renderer;
 
 import blitting.lifecycle.IDisposable;
 import blitting.lifecycle.IInitializable;

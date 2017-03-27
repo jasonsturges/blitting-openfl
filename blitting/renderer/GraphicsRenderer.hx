@@ -7,12 +7,12 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.display;
+package blitting.renderer;
 
 import openfl.display.DisplayObject;
 import openfl.display.Graphics;
-import blitting.display.AbstractRenderer;
-import blitting.display.IGraphicsRenderer;
+import blitting.renderer.AbstractRenderer;
+import blitting.renderer.IGraphicsRenderer;
 
 class GraphicsRenderer extends AbstractRenderer implements IGraphicsRenderer {
 

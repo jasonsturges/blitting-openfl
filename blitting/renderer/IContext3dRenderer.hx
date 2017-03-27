@@ -7,10 +7,10 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.display;
+package blitting.renderer;
 
 import openfl.display3D.Context3D;
-import blitting.display.IRenderer;
+import blitting.renderer.IRenderer;
 
 interface IContext3dRenderer extends IRenderer {
 

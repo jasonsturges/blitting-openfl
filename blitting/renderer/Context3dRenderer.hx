@@ -7,19 +7,25 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.display;
+package blitting.renderer;
 
-import openfl.display.BitmapData;
-import blitting.display.AbstractRenderer;
-import blitting.display.IBitmapRenderer;
+import openfl.display3D.Context3D;
+import openfl.display3D.IndexBuffer3D;
+import openfl.display3D.Program3D;
+import openfl.display3D.VertexBuffer3D;
+import blitting.renderer.AbstractRenderer;
 
-class BitmapRenderer extends AbstractRenderer implements IBitmapRenderer {
+class Context3dRenderer extends AbstractRenderer {
 
     //------------------------------
     //  model
     //------------------------------
 
-    private var bitmapData:BitmapData;
+    private var program3d:Program3D;
+
+    private var vertexBuffer3d:VertexBuffer3D;
+
+    private var indexBuffer3d:IndexBuffer3D;
 
 
     //------------------------------
@@ -30,20 +36,15 @@ class BitmapRenderer extends AbstractRenderer implements IBitmapRenderer {
         super();
     }
 
-    override public function initialize():Void {
-        super.initialize();
-
-        bitmapData = null;
-    }
-
-    public function render(bitmapData:BitmapData):Void {
-        this.bitmapData = bitmapData;
+    public function render(context3d:Context3D):Void {
     }
 
     override public function dispose():Void {
         super.dispose();
 
-        bitmapData = null;
+        program3d = null;
+        vertexBuffer3d = null;
+        indexBuffer3d = null;
     }
 
 }

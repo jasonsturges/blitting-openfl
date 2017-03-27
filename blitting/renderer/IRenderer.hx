@@ -7,13 +7,7 @@
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
-package blitting.display;
+package blitting.renderer;
 
-import openfl.display.BitmapData;
-import blitting.display.IRenderer;
-
-interface IBitmapRenderer extends IRenderer {
-
-    function render(bitmapData:BitmapData):Void;
-
+interface IRenderer {
 }
