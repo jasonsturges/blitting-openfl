@@ -21,7 +21,7 @@ class CountdownTimer extends Timer implements IDisposable {
 
     private var _time:Float = 0;
 
-    public var util(get, set):Float;
+    public var time(get, set):Float;
 
     public function get_time():Float {
         return _time;
@@ -36,7 +36,7 @@ class CountdownTimer extends Timer implements IDisposable {
     //  lifecycle
     //------------------------------
 
-    public function new(util:Float = 0, delay:Float = 1000) {
+    public function new(time:Float = 0, delay:Float = 1000) {
         super(delay, repeatCount);
 
         if (!Math.isNaN(time))
