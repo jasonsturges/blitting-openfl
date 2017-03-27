@@ -40,13 +40,12 @@ class AbstractControl<T> extends ResizableViewport implements IControl<T> {
 
     public function new() {
         super();
-
-        renderType = RenderType.OnInvalidation;
     }
 
     override public function initialize():Void {
         super.initialize();
 
+        renderType = RenderType.OnInvalidation;
         value = null;
     }
 
