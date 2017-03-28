@@ -181,9 +181,9 @@ class Color implements IInitializable {
      * @see ColorPalette
      *
      */
-//    public static function fromName(name : String) : Color{
-//        return Color.fromRGB(ColorPalette.fromName(name));
-//    }
+    public static function fromName(name:String):Color {
+        return Color.fromRGB(ColorPalette.fromName(name));
+    }
 
     /**
      * Get 32-bit ARGB color as integer.

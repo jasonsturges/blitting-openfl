@@ -563,4 +563,9 @@ class ColorPalette {
     public static var yellow3:UInt = 0xcdcd00;
     public static var yellow4:UInt = 0x8b8b00;
     public static var yellowGreen:UInt = 0x9acd32;
+
+    public static function fromName(name:String):UInt {
+        return Reflect.field(ColorPalette, name);
+    }
+
 }
