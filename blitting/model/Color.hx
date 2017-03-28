@@ -137,7 +137,7 @@ class Color implements IInitializable {
         return new Color(color >>> 16 & 0xff, // red
         color >>> 8 & 0xff, // green
         color & 0xff, // blue
-        color >>> 24 // alpha  ,
+        color >>> 24 // alpha
         );
     }
 

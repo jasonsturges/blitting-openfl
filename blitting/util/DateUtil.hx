@@ -12,7 +12,7 @@ package blitting.util;
 class DateUtil {
 
     /**
-        Whether the current util is Ante meridiem (AM) or
+        Whether the current time is Ante meridiem (AM) or
         Post meridiem (PM), for 12-hour clock.
     **/
     public static function meridiem(d:Date):String {
@@ -20,7 +20,7 @@ class DateUtil {
     }
 
     /**
-        Whether daylight savings util is currently observed.
+        Whether daylight savings time is currently observed.
         TODO: Not implemented, pending resolution of consistent
               timezone offset.
     **/

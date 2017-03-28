@@ -63,7 +63,6 @@ class AbstractViewport extends Sprite
     /**
      * constructor
      */
-
     public function new() {
         super();
 
@@ -73,7 +72,6 @@ class AbstractViewport extends Sprite
     /**
      * initialize (IInitializable)
      */
-
     public function initialize():Void {
         bounds = new Rectangle();
         registration = new Point();
@@ -82,7 +80,6 @@ class AbstractViewport extends Sprite
     /**
      * dispose (IDisposable)
      */
-
     public function dispose():Void {
         bounds = null;
         registration = null;

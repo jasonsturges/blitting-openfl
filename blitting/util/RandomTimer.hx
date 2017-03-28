@@ -13,17 +13,37 @@ import openfl.events.TimerEvent;
 import openfl.utils.Timer;
 
 /**
- * <p>
  * Dispatch timer events at random intervals.
- * </p>
- * <p>
- * Inherits from native flash.utils.Timer;
- * therefore, implemented using standard Timer patterns.<br />
- * </p>
- * <p>
- * Dispatches native flash.events.TimerEvent
- * of types TimerEvent.TIMER and TimerEvent.TIMER_COMPLETE.
- * </p>
+ *  
+ * Inherits from native `openfl.utils.Timer`;
+ * therefore, implemented using standard timer patterns.
+ *  
+ * Dispatches native `openfl.events.TimerEvent`
+ * of types `TimerEvent.TIMER` and `TimerEvent.TIMER_COMPLETE`.
+ *  
+ * When inheriting from RandomTimer, the `timerHandler()` override
+ * provides a convenient implementation to timer
+ * event handling without directly assigning listeners.
+ *
+ * Example:
+ *
+ * ```
+ * public class FunctionTimer extends RandomTimer {
+ *     private var _functions:Vector.<Function> = new <Function>[];
+ *
+ *     public function addFunction(f:Function):void {
+ *         _functions.push(f);
+ *     }
+ *
+ *     override protected function timerHandler(event:TimerEvent):void {
+ *         super.timerHandler(event);
+ *         for each(var f:Function in _functions) {
+ *             if (f != null)
+ *                 f();
+ *         }
+ *     }
+ * }
+ * ```
  */
 class RandomTimer extends Timer {
 
@@ -37,10 +57,7 @@ class RandomTimer extends Timer {
     /** Maximum possible delay for random timer signal. */
     public var maximumDelay:Float;
 
-    /** _count */
     private var _count:UInt = 0;
-
-    /** _repeatCount */
     private var _repeatCount:UInt = 0;
 
 
@@ -49,12 +66,8 @@ class RandomTimer extends Timer {
     //------------------------------
 
     /**
-     * constructor
-     *
-     * <p>
      * Create random timer dispatching events within
-     * min / max millisecond values.<br />
-     * </p>
+     * min / max millisecond values.
      */
     public function new(min:Float, max:Float, repeatCount:UInt = 0) {
         super(delay, repeatCount);
@@ -75,7 +88,7 @@ class RandomTimer extends Timer {
     }
 
     /**
-     * Internal private function to determine next delay period.
+     * Determine next delay period.
      */
     private function nextDelay():Float {
         return (minimumDelay + (Math.random() * (maximumDelay - minimumDelay)));
@@ -92,30 +105,6 @@ class RandomTimer extends Timer {
     /**
      * Handler on TimerEvent.TIMER, responsible for
      * changing delay to random value.
-     *
-     * When inheriting from RandomTimer, this override
-     * provides a convenient implementation to timer
-     * event handling without directly assigned.
-     *
-     * Example:
-     *
-     * ```haxe
-     * public class FunctionTimer extends RandomTimer {
-     *     private var _functions:Vector.<Function> = new <Function>[];
-     *
-     *     public function addFunction(f:Function):void {
-     *         _functions.push(f);
-     *     }
-     *
-     *     override protected function timerHandler(event:TimerEvent):void {
-     *         super.timerHandler(event);
-     *         for each(var f:Function in _functions) {
-     *             if (f != null)
-     *                 f();
-     *         }
-     *     }
-     * }
-     * ```
      */
     @:dox(show)
     private function timerHandler(event:TimerEvent):Void {

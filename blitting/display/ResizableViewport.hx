@@ -110,7 +110,7 @@ class ResizableViewport extends RenderedViewport
     }
 
     /**
-     *
+     * Layout (IResizable)
      */
     public function layout():Void {
     }
