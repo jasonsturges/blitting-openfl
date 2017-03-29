@@ -13,14 +13,20 @@ of the [Blitting](https://github.com/jasonsturges/blitting) ActionScript library
 
 ## Installation
 
-This library can be installed through haxelib by executing:
+This library can be installed through any of the following ways.  
+
+To use the latest release from haxelib:
 
     $ haxelib install blitting
     
+To use the latest development from GitHub:
+
+    $ haxelib git blitting https://github.com/jasonsturges/blitting-openfl.git
+
 To use a local copy as a development haxelib, clone this repo and link the source directory by executing:
  
-     $ git clone https://github.com/jasonsturges/blitting-openfl.git
-     $ haxelib dev blitting-openfl ./blitting-openfl
+    $ git clone https://github.com/jasonsturges/blitting-openfl.git
+    $ haxelib dev blitting-openfl ./blitting-openfl
      
 ## Project Setup
 
