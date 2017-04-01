@@ -43,7 +43,7 @@ For inclusion into a Haxe project, add this library by updating your project.xml
 
 Here are a few starting points:
 
-* [API Reference](http://jasonsturges.github.io/blitting-openfl/)
+* [API Reference](http://api.blitting.com/)
 
 
 ### Releases
