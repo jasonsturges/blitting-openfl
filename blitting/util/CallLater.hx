@@ -33,12 +33,12 @@ class CallLater {
     //------------------------------
 
     /**
-     *  Constructor
-     *  @param delay - The delay in ms to make the call.
-     *  @param scope - An object that specifies the scope (value of `this` object) within the function body.
-     *  @param callback - Function to call after the specified delay.
-     *  @param params - Parameters to be passed to the function.
-     */
+        Constructor
+        @param delay     The delay in ms to make the call.
+        @param scope     An object that specifies the scope (value of `this` object) within the function body.
+        @param callback  Function to call after the specified delay.
+        @param params    Parameters to be passed to the function.
+    **/
     public function new(delay:Int = 1, ?scope:Dynamic, ?callback:Dynamic, ?params:Array<Dynamic>) {
         this.delay = delay;
         this.scope = scope;
