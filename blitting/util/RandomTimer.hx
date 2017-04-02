@@ -98,8 +98,8 @@ class RandomTimer extends Timer {
      * Stop the timer.
      */
     override public function stop():Void {
-        removeEventListener(TimerEvent.TIMER, timerHandler);
         super.stop();
+        removeEventListener(TimerEvent.TIMER, timerHandler);
     }
 
     /**
