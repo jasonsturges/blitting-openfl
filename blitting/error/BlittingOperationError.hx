@@ -8,8 +8,12 @@
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
 */
 package blitting.error;
+import openfl.errors.Error;
 
-class BlittingOperationError {
-    public function new() {
+class BlittingOperationError extends Error {
+
+    public function new(message:String = "", id:Int = 0) {
+        super(message, id);
     }
+
 }
