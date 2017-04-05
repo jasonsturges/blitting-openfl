@@ -103,6 +103,7 @@ class Viewport3d extends ResizableViewport {
         if(_context3d == null)
             return;
 
+        _context3d.clear(0, 0, 0, 1);
     }
 
     override public function postrender(changeRect:Rectangle = null):Void {
