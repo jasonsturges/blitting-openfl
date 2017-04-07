@@ -26,7 +26,7 @@ To use the latest development from GitHub:
 To use a local copy as a development haxelib, clone this repo and link the source directory by executing:
  
     $ git clone https://github.com/jasonsturges/blitting-openfl.git
-    $ haxelib dev blitting-openfl ./blitting-openfl
+    $ haxelib dev blitting ./blitting-openfl
      
 ## Project Setup
 
