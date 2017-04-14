@@ -119,7 +119,7 @@ class BufferedViewport extends ResizableViewport {
                         smoothing:Bool = true) {
         super();
 
-        bitmap = new Bitmap();
+        _bitmap = new Bitmap();
 
         this.transparent = transparent;
         this.fillColor = fillColor;
@@ -143,7 +143,7 @@ class BufferedViewport extends ResizableViewport {
     override private function addedToStageHandler(event:Event):Void {
         super.addedToStageHandler(event);
 
-        addChild(bitmap);
+        addChild(_bitmap);
     }
 
     /**
@@ -152,8 +152,8 @@ class BufferedViewport extends ResizableViewport {
     override public function validate():Void {
         super.validate();
 
-        bitmap.pixelSnapping = pixelSnapping;
-        bitmap.smoothing = smoothing;
+        _bitmap.pixelSnapping = pixelSnapping;
+        _bitmap.smoothing = smoothing;
     }
 
     /**
@@ -172,9 +172,9 @@ class BufferedViewport extends ResizableViewport {
         super.layout();
 
         // if same size, do not resize bitmap
-        if ((bitmapData != null) &&
-        (bitmapData.rect.width == bounds.width) &&
-        (bitmapData.rect.height == bounds.height))
+        if ((_bitmapData != null) &&
+        (_bitmapData.rect.width == bounds.width) &&
+        (_bitmapData.rect.height == bounds.height))
             return;
 
         // if invalid size, return
@@ -182,16 +182,16 @@ class BufferedViewport extends ResizableViewport {
             return;
 
         // cached bitmap data
-        var cachedBitmapData:BitmapData = bitmapData;
+        var cachedBitmapData:BitmapData = _bitmapData;
 
-        bitmapData = null;
-        bitmap.bitmapData = null;
+        _bitmapData = null;
+        _bitmap.bitmapData = null;
 
         // instantiate at new bounds
-        bitmapData = new BitmapData(Math.ceil(bounds.width), Math.ceil(bounds.height), transparent, fillColor);
-        bitmap.bitmapData = bitmapData;
-        bitmap.pixelSnapping = pixelSnapping;
-        bitmap.smoothing = smoothing;
+        _bitmapData = new BitmapData(Math.ceil(bounds.width), Math.ceil(bounds.height), transparent, fillColor);
+        _bitmap.bitmapData = _bitmapData;
+        _bitmap.pixelSnapping = pixelSnapping;
+        _bitmap.smoothing = smoothing;
 
         if (cachedBitmapData == null)
             return;
@@ -199,7 +199,7 @@ class BufferedViewport extends ResizableViewport {
         if (scaleOnResize) {
             var matrix:Matrix = new Matrix();
             matrix.scale(bounds.width / cachedBitmapData.width, bounds.height / cachedBitmapData.height);
-            bitmapData.draw(cachedBitmapData, matrix);
+            _bitmapData.draw(cachedBitmapData, matrix);
         }
 
         cachedBitmapData.dispose();
@@ -210,7 +210,7 @@ class BufferedViewport extends ResizableViewport {
      *  Clear
      */
     public function clear():Void {
-        bitmapData.fillRect(bitmapData.rect, fillColor);
+        _bitmapData.fillRect(_bitmapData.rect, fillColor);
     }
 
     /**
@@ -219,10 +219,10 @@ class BufferedViewport extends ResizableViewport {
     override public function prerender():Void {
         super.prerender();
 
-        if (bitmapData == null)
+        if (_bitmapData == null)
             return;
 
-        bitmapData.lock();
+        _bitmapData.lock();
     }
 
     /**
@@ -239,10 +239,10 @@ class BufferedViewport extends ResizableViewport {
     override public function postrender(changeRect:Rectangle = null):Void {
         super.postrender(changeRect);
 
-        if (bitmapData == null)
+        if (_bitmapData == null)
             return;
 
-        bitmapData.unlock(changeRect);
+        _bitmapData.unlock(changeRect);
     }
 
     /**
@@ -252,7 +252,7 @@ class BufferedViewport extends ResizableViewport {
     override private function removedFromStageHandler(event:Event):Void {
         super.removedFromStageHandler(event);
 
-        removeChild(bitmap);
+        removeChild(_bitmap);
     }
 
     /**
@@ -261,11 +261,11 @@ class BufferedViewport extends ResizableViewport {
     override public function dispose():Void {
         super.dispose();
 
-        bitmap = null;
+        _bitmap = null;
 
-        if (bitmapData != null) {
-            bitmapData.dispose();
-            bitmapData = null;
+        if (_bitmapData != null) {
+            _bitmapData.dispose();
+            _bitmapData = null;
         }
     }
 
