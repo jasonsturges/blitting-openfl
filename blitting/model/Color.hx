@@ -135,10 +135,10 @@ class Color implements IInitializable {
      */
     public static function fromARGB(color:Int):Color {
         return new Color(color >>> 16 & 0xff, // red
-        color >>> 8 & 0xff, // green
-        color & 0xff, // blue
-        color >>> 24 // alpha
-        );
+                         color >>> 8 & 0xff, // green
+                         color & 0xff, // blue
+                         color >>> 24 // alpha
+                        );
     }
 
     /**
@@ -154,10 +154,10 @@ class Color implements IInitializable {
      */
     public static function fromRGBA(color:Int):Color {
         return new Color(color >>> 24, // red
-        color >>> 16 & 0xff, // green
-        color >>> 8 & 0xf, // blue
-        color & 0xff // alpha
-        );
+                         color >>> 16 & 0xff, // green
+                         color >>> 8 & 0xf, // blue
+                         color & 0xff // alpha
+                        );
     }
 
     /**
@@ -168,9 +168,9 @@ class Color implements IInitializable {
      */
     public static function fromRGB(color:Int):Color {
         return new Color(color >> 16 & 0xff, // red
-        color >> 8 & 0xff, // green
-        color & 0xff // blue
-        );
+                         color >> 8 & 0xff, // green
+                         color & 0xff // blue
+                        );
     }
 
     /**
