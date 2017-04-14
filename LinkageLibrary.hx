@@ -10,6 +10,8 @@
 package;
 
 import blitting.constant.ColorPalette;
+import blitting.constant.Direction;
+import blitting.constant.Orientation;
 import blitting.controller.AbstractController;
 import blitting.controller.IController;
 import blitting.controller.MovieClipController;
