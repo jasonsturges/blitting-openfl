@@ -13,7 +13,7 @@ import blitting.constant.ColorPalette;
 import blitting.lifecycle.IInitializable;
 
 /**
- * Color structure.
+ * 32-bit ARGB color structure
  */
 class Color implements IInitializable {
     public var rgb(get, never):Int;
