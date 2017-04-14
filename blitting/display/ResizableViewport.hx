@@ -23,11 +23,6 @@ implements IResizable {
     //------------------------------
 
     /**
-     * Rendering engine.
-     */
-    private var blitting(default, never):Blitting = Blitting.instance;
-
-    /**
      * Bind to full stage bounds.
      */
     public var fullStage:Bool;

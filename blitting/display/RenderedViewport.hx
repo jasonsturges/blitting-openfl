@@ -63,7 +63,7 @@ implements IRenderable {
     }
 
     public function set_frameRate(value:Float):Float {
-        if (_frameRate = !value)
+        if (_frameRate != value)
             invalidate();
 
         return _frameRate = value;
