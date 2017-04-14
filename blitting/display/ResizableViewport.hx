@@ -16,7 +16,7 @@ import blitting.display.RenderedViewport;
 import blitting.lifecycle.IResizable;
 
 class ResizableViewport extends RenderedViewport
-    implements IResizable {
+implements IResizable {
 
     //------------------------------
     //  model
@@ -25,11 +25,7 @@ class ResizableViewport extends RenderedViewport
     /**
      * Rendering engine.
      */
-    public static var blitting(get, null):Blitting;
-
-    private static function get_blitting():Blitting {
-        return Blitting.instance;
-    }
+    private var blitting(default, never):Blitting = Blitting.instance;
 
     /**
      * Bind to full stage bounds.
@@ -42,14 +38,14 @@ class ResizableViewport extends RenderedViewport
     //------------------------------
 
     /**
-     * constructor
+     *  Constructor
      */
     public function new() {
         super();
     }
 
     /**
-     * initialize (IInitializable)
+     *  Initialize (IInitializable)
      */
     override public function initialize():Void {
         super.initialize();
@@ -58,7 +54,7 @@ class ResizableViewport extends RenderedViewport
     }
 
     /**
-     * addedToStageHandler
+     *  Added to stage handler
      */
     override private function addedToStageHandler(event:Event):Void {
         super.addedToStageHandler(event);
@@ -74,22 +70,22 @@ class ResizableViewport extends RenderedViewport
     }
 
     /**
-     * Enter full screen mode specifying whether display
-     * remains interactive to keyboard events.
+     *  Enter full screen mode specifying whether display
+     *  remains interactive to keyboard events.
      */
     private function fullScreen(interactive:Bool = true):Void {
         #if flash
         if (interactive && stage.allowsFullScreenInteractive) {
             stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
         } else
-        #end
+            #end
         if (stage.allowsFullScreen) {
             stage.displayState = StageDisplayState.FULL_SCREEN;
         }
     }
 
     /**
-     * resizeHandler
+     *  Resize handler
      */
     private function resizeHandler(event:Event):Void {
         if (fullStage)
@@ -97,8 +93,8 @@ class ResizableViewport extends RenderedViewport
     }
 
     /**
-     * Resize command to invalidate size of viewport
-     * and automatically enqueue rendering.
+     *  Resize (IResizable) -command to invalidate size of viewport
+     *  and automatically enqueue rendering.
      */
     public function resize(width:Float, height:Float):Void {
         bounds.width = width;
@@ -110,13 +106,13 @@ class ResizableViewport extends RenderedViewport
     }
 
     /**
-     * Layout (IResizable)
+     *  Layout (IResizable)
      */
     public function layout():Void {
     }
 
     /**
-     * dispose (IDisposable)
+     *  Dispose (IDisposable)
      */
     override public function dispose():Void {
         super.dispose();

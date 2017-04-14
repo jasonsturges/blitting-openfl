@@ -17,17 +17,17 @@ import blitting.lifecycle.IDisposable;
 import blitting.lifecycle.IValidatable;
 
 class Viewport extends AbstractViewport
-    implements IValidatable {
+implements IValidatable {
 
     //------------------------------
     //  model
     //------------------------------
 
     /**
-     * Whether properties have been invalidated,
-     * requiring validation.
+     *  Whether properties have been invalidated,
+     *  requiring validation.
      */
-    private var invalidated:Bool;
+    private var _invalidated:Bool;
 
 
     //------------------------------
@@ -35,19 +35,19 @@ class Viewport extends AbstractViewport
     //------------------------------
 
     /**
-     * constructor
+     *  Constructor
      */
     public function new() {
         super();
     }
 
     /**
-     * initialize (IInitializable)
+     *  Initialize (IInitializable)
      */
     override public function initialize():Void {
         super.initialize();
 
-        invalidated = false;
+        _invalidated = false;
         mouseEnabled = mouseChildren = tabChildren = false;
         //focusRect = tabEnabled  = false;
 
@@ -55,7 +55,7 @@ class Viewport extends AbstractViewport
     }
 
     /**
-     * autoOrientation
+     *  Auto orientation
      */
     public function autoOrientation():Void {
         if (stage == null)
@@ -66,7 +66,7 @@ class Viewport extends AbstractViewport
     }
 
     /**
-     * addedToStageHandler
+     *  Added to stage handler.
      */
     private function addedToStageHandler(event:Event):Void {
         removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
@@ -74,32 +74,32 @@ class Viewport extends AbstractViewport
     }
 
     /**
-     * Indicate component has been invalidated. (IValidatable).
+     *  Invalidate (IValidatable) - Indicate component has been invalidated.
      *
-     * Viewport abstract base class does not manage invalidation through
-     * the BlittingEngine; therefore, validation commit stage must be
-     * implemented via inheritance.
+     *  Viewport abstract base class does not manage invalidation through
+     *  the BlittingEngine; therefore, validation commit stage must be
+     *  implemented via inheritance.
      */
     public function invalidate():Void {
-        if (invalidated)
+        if (_invalidated)
             return;
 
-        invalidated = true;
+        _invalidated = true;
     }
 
     /**
-     * Indicate component has been validated. (IValidatable).
+     *  Validate (IValidatable) - Indicate component has been validated.
      *
-     * Viewport abstract base class does not manage invalidation through
-     * the BlittingEngine; therefore, validation commit stage must be
-     * implemented via inheritance.
+     *  Viewport abstract base class does not manage invalidation through
+     *  the BlittingEngine; therefore, validation commit stage must be
+     *  implemented via inheritance.
      */
     public function validate():Void {
-        invalidated = false;
+        _invalidated = false;
     }
 
     /**
-     * removedFromStageHandler
+     *  Removed from stage handler
      */
     private function removedFromStageHandler(event:Event):Void {
         removeEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler);
@@ -107,7 +107,7 @@ class Viewport extends AbstractViewport
     }
 
     /**
-     * dispose (IDisposable)
+     *  Dispose (IDisposable)
      */
     override public function dispose():Void {
         super.dispose();

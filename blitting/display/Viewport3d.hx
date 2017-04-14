@@ -100,7 +100,7 @@ class Viewport3d extends ResizableViewport {
     override public function prerender():Void {
         super.prerender();
 
-        if(_context3d == null)
+        if (_context3d == null)
             return;
 
         _context3d.clear(0, 0, 0, 1);

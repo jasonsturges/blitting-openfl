@@ -17,19 +17,22 @@ import blitting.lifecycle.IInitializable;
 
 
 class AbstractViewport extends Sprite
-    implements IViewport
-    implements IInitializable
-    implements IDisposable {
+implements IViewport
+implements IInitializable
+implements IDisposable {
+
 
     //------------------------------
     //  model
     //------------------------------
 
+    private var _bounds:Rectangle;
+    private var _registration:Point;
+
+
     /**
      * Viewport bounds (IViewport)
      */
-    private var _bounds:Rectangle;
-
     public var bounds(get, set):Rectangle;
 
     public function get_bounds():Rectangle {
@@ -43,8 +46,6 @@ class AbstractViewport extends Sprite
     /**
      * Registration point (IViewport)
      */
-    private var _registration:Point;
-
     public var registration(get, set):Point;
 
     public function get_registration():Point {
@@ -61,7 +62,7 @@ class AbstractViewport extends Sprite
     //------------------------------
 
     /**
-     * constructor
+     * Constructor
      */
     public function new() {
         super();
@@ -70,7 +71,7 @@ class AbstractViewport extends Sprite
     }
 
     /**
-     * initialize (IInitializable)
+     * Initialize (IInitializable)
      */
     public function initialize():Void {
         bounds = new Rectangle();
@@ -78,7 +79,7 @@ class AbstractViewport extends Sprite
     }
 
     /**
-     * dispose (IDisposable)
+     * Dispose (IDisposable)
      */
     public function dispose():Void {
         bounds = null;

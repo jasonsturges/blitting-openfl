@@ -23,68 +23,84 @@ class BufferedViewport extends ResizableViewport {
     //  model
     //------------------------------
 
-    @:isVar private var bitmap(get, set):Bitmap;
-    @:isVar private var bitmapData(get, set):BitmapData;
-    @:isVar public var fillColor(get, set):UInt;
-    @:isVar public var pixelSnapping(get, set):PixelSnapping;
-    @:isVar public var scaleOnResize(get, set):Bool;
-    @:isVar public var smoothing(get, set):Bool;
-    @:isVar public var transparent(get, set):Bool;
+    private var _bitmap:Bitmap;
+    private var _bitmapData:BitmapData;
+    private var _fillColor:UInt;
+    private var _pixelSnapping:PixelSnapping;
+    private var _scaleOnResize:Bool;
+    private var _smoothing:Bool;
+    private var _transparent:Bool;
 
 
-    inline private function get_bitmap():Bitmap {
-        return bitmap;
-    }
-    inline private function set_bitmap(value:Bitmap):Bitmap {
-        return bitmap = value;
-    }
-
-    private function get_bitmapData():BitmapData {
-        return bitmapData;
-    }
-    private function set_bitmapData(value:BitmapData):BitmapData {
-        return bitmapData = value;
-    }
+    /**
+     *  Fill color
+     */
+    public var fillColor(get, set):UInt;
 
     public function get_fillColor():UInt {
-        return fillColor;
+        return _fillColor;
     }
+
     public function set_fillColor(value:UInt):UInt {
-        return fillColor = value;
+        return _fillColor = value;
     }
+
+    /**
+     *  Pixel snapping
+     */
+    public var pixelSnapping(get, set):PixelSnapping;
 
     public function get_pixelSnapping():PixelSnapping {
-        return pixelSnapping;
+        return _pixelSnapping;
     }
+
     public function set_pixelSnapping(value:PixelSnapping):PixelSnapping {
-        if (pixelSnapping != value)
+        if (_pixelSnapping != value)
             invalidate();
 
-        return pixelSnapping = value;
+        return _pixelSnapping = value;
     }
+
+    /**
+     *  Scale on resize
+     */
+    public var scaleOnResize(get, set):Bool;
 
     public function get_scaleOnResize():Bool {
-        return scaleOnResize;
+        return _scaleOnResize;
     }
+
     public function set_scaleOnResize(value:Bool):Bool {
-        return scaleOnResize = value;
+        return _scaleOnResize = value;
     }
+
+    /**
+     *  Smoothing
+     */
+    public var smoothing(get, set):Bool;
 
     public function get_smoothing():Bool {
-        return smoothing;
+        return _smoothing;
     }
+
     public function set_smoothing(value:Bool):Bool {
-        if (smoothing != value)
+        if (_smoothing != value)
             invalidate();
 
-        return smoothing = value;
+        return _smoothing = value;
     }
 
+    /**
+     *  Transparent
+     */
+    public var transparent(get, set):Bool;
+
     public function get_transparent():Bool {
-        return transparent;
+        return _transparent;
     }
+
     public function set_transparent(value:Bool):Bool {
-        return transparent = value;
+        return _transparent = value;
     }
 
 
@@ -92,6 +108,12 @@ class BufferedViewport extends ResizableViewport {
     //  lifecycle
     //------------------------------
 
+    /**
+     *  Constructor
+     *  @param transparent - 
+     *  @param fillColor - 
+     *  @param smoothing - 
+     */
     public function new(transparent:Bool = true,
                         fillColor:UInt = 0xff00ff,
                         smoothing:Bool = true) {
@@ -104,6 +126,9 @@ class BufferedViewport extends ResizableViewport {
         this.smoothing = smoothing;
     }
 
+    /**
+     *  Initialize (IInitializable)
+     */
     override public function initialize():Void {
         super.initialize();
 
@@ -111,12 +136,19 @@ class BufferedViewport extends ResizableViewport {
         pixelSnapping = PixelSnapping.AUTO;
     }
 
+    /**
+     *  Added to stage handler
+     *  @param event - 
+     */
     override private function addedToStageHandler(event:Event):Void {
         super.addedToStageHandler(event);
 
         addChild(bitmap);
     }
 
+    /**
+     *  Validate (IValidatable)
+     */
     override public function validate():Void {
         super.validate();
 
@@ -124,17 +156,25 @@ class BufferedViewport extends ResizableViewport {
         bitmap.smoothing = smoothing;
     }
 
+    /**
+     *  Resize (IResizable)
+     *  @param width - 
+     *  @param height - 
+     */
     override public function resize(width:Float, height:Float):Void {
         super.resize(Math.ceil(width), Math.ceil(height));
     }
 
+    /**
+     *  Layout (IResizable)
+     */
     override public function layout():Void {
         super.layout();
 
         // if same size, do not resize bitmap
         if ((bitmapData != null) &&
-            (bitmapData.rect.width == bounds.width) &&
-            (bitmapData.rect.height == bounds.height))
+        (bitmapData.rect.width == bounds.width) &&
+        (bitmapData.rect.height == bounds.height))
             return;
 
         // if invalid size, return
@@ -153,7 +193,7 @@ class BufferedViewport extends ResizableViewport {
         bitmap.pixelSnapping = pixelSnapping;
         bitmap.smoothing = smoothing;
 
-        if(cachedBitmapData == null)
+        if (cachedBitmapData == null)
             return;
 
         if (scaleOnResize) {
@@ -166,10 +206,16 @@ class BufferedViewport extends ResizableViewport {
         cachedBitmapData = null;
     }
 
+    /**
+     *  Clear
+     */
     public function clear():Void {
         bitmapData.fillRect(bitmapData.rect, fillColor);
     }
 
+    /**
+     *  Pre-render (IRenderable)
+     */
     override public function prerender():Void {
         super.prerender();
 
@@ -179,10 +225,17 @@ class BufferedViewport extends ResizableViewport {
         bitmapData.lock();
     }
 
+    /**
+     *  Render (IRenderable)
+     */
     override public function render():Void {
         super.render();
     }
 
+    /**
+     *  Post-render (IRenderable)
+     *  @param changeRect - 
+     */
     override public function postrender(changeRect:Rectangle = null):Void {
         super.postrender(changeRect);
 
@@ -192,6 +245,19 @@ class BufferedViewport extends ResizableViewport {
         bitmapData.unlock(changeRect);
     }
 
+    /**
+     *  Removed from stage handler
+     *  @param event - 
+     */
+    override private function removedFromStageHandler(event:Event):Void {
+        super.removedFromStageHandler(event);
+
+        removeChild(bitmap);
+    }
+
+    /**
+     *  Dispose (IDisposable)
+     */
     override public function dispose():Void {
         super.dispose();
 

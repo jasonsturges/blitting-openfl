@@ -20,36 +20,33 @@ import blitting.lifecycle.IRenderable;
 
 
 /**
- * Extends Viewport to include BlittingEngine
- * and IRenderable lifecycle.
- *
- * <ul>
- *    <li>pre-render</li>
- *    <li>render</li>
- *    <li>post-render</li>
- * </ul>
+ * Extends Viewport to include Blitting core rendering engine
+ * and IRenderable lifecycle:
+ *   - pre-render
+ *   - render
+ *   - post-render
  */
 class RenderedViewport extends Viewport
-    implements IRenderable {
+implements IRenderable {
 
     //------------------------------
     //  model
     //------------------------------
 
+    private var _deltaTime:Int;
+    private var _frameNumber:UInt;
+    private var _frameRate:Float;
+    private var _runtime:Int;
+
+
     /**
      * Rendering engine.
      */
-    public static var blitting(get, null):Blitting;
-
-    private static function get_blitting():Blitting {
-        return Blitting.instance;
-    }
+    private var blitting(default, never):Blitting = Blitting.instance;
 
     /**
      * Current (total) frame number.
      */
-    private var _frameNumber:UInt;
-
     public var frameNumber (get, null):UInt;
 
     public function get_frameNumber():UInt {
@@ -59,8 +56,6 @@ class RenderedViewport extends Viewport
     /**
      * Frame rate of rendering.
      */
-    private var _frameRate:Float;
-
     public var frameRate(get, set):Float;
 
     public function get_frameRate():Float {
@@ -68,10 +63,9 @@ class RenderedViewport extends Viewport
     }
 
     public function set_frameRate(value:Float):Float {
-        if (_frameRate == value)
-            return _frameRate;
+        if (_frameRate = !value)
+            invalidate();
 
-        invalidate();
         return _frameRate = value;
     }
 
@@ -81,10 +75,8 @@ class RenderedViewport extends Viewport
     public var renderType:RenderType;
 
     /**
-        Total time elapsed of viewport, in milliseconds.
-    **/
-    private var _runtime:Int;
-
+     *  Total time elapsed of viewport, in milliseconds.
+     */
     public var runtime (get, null):Int;
 
     public function get_runtime():Int {
@@ -92,10 +84,8 @@ class RenderedViewport extends Viewport
     }
 
     /**
-        Time since last frame render
-    **/
-    private var _deltaTime:Int;
-
+     *  Time since last frame render, in milliseconds.
+     */
     public var deltaTime (get, null):Int;
 
     public function get_deltaTime():Int {
@@ -107,12 +97,19 @@ class RenderedViewport extends Viewport
     //  lifecycle
     //------------------------------
 
+    /**
+     *  Constructor
+     *  @param frameRate - 
+     */
     public function new(frameRate:Float = 60) {
         super();
 
         this.frameRate = frameRate;
     }
 
+    /**
+     * initialize (IInitializable)
+     */
     override public function initialize():Void {
         super.initialize();
 
@@ -121,6 +118,10 @@ class RenderedViewport extends Viewport
         _runtime = _deltaTime = Lib.getTimer();
     }
 
+    /**
+     *  Added to stage handler
+     *  @param event - 
+     */
     override private function addedToStageHandler(event:Event):Void {
         super.addedToStageHandler(event);
 
@@ -130,10 +131,17 @@ class RenderedViewport extends Viewport
         invalidate();
     }
 
+    /**
+     *  Change render type
+     *  @param renderType - 
+     */
     public function changeRenderType(renderType:RenderType):Void {
         blitting.changeRenderer(this, renderType);
     }
 
+    /**
+     *  Invalidate (IValidatable)
+     */
     override public function invalidate():Void {
         super.invalidate();
 
@@ -143,6 +151,9 @@ class RenderedViewport extends Viewport
             blitting.addRenderer(this, RenderType.Once);
     }
 
+    /**
+     *  Validate (IValidatable)
+     */
     override public function validate():Void {
         super.validate();
 
@@ -151,32 +162,39 @@ class RenderedViewport extends Viewport
     }
 
     /**
-     * pre-render
+     * Pre-render (IRenderable)
      */
     public function prerender():Void {
         ++_frameNumber;
     }
 
     /**
-     * render
+     * Render (IRenderable)
      */
     public function render():Void {
     }
 
     /**
-     * post-render
+     * Post-render (IRenderable)
      */
     public function postrender(changeRect:Rectangle = null):Void {
         // Update time elapsed since last frame render
         _deltaTime = Lib.getTimer();
     }
 
+    /**
+     *  Removed from stage handler
+     *  @param event - 
+     */
     override private function removedFromStageHandler(event:Event):Void {
         super.removedFromStageHandler(event);
 
         blitting.removeRenderer(this);
     }
 
+    /**
+     *  Dispose (IDisposable)
+     */
     override public function dispose():Void {
         super.dispose();
 

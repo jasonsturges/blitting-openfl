@@ -21,9 +21,11 @@ import blitting.lifecycle.IRenderable;
 import blitting.lifecycle.IValidatable;
 import blitting.model.ISingleton;
 
+
 class Blitting extends AbstractController<Blitting>
-    implements ISingleton<Blitting>
-    implements IProcess {
+implements ISingleton<Blitting>
+implements IProcess {
+
 
     //------------------------------
     //  singleton instance
@@ -47,14 +49,18 @@ class Blitting extends AbstractController<Blitting>
     //  model
     //------------------------------
 
-    private var layoutPipeline:Map<IResizable, Bool>;
-
-    private var renderPipeline:Map<IRenderable, RenderType>;
-
-    private var validationPipeline:Map<IValidatable, ValidationType>;
-
+    private var _layoutPipeline:Map<IResizable, Bool>;
+    private var _renderPipeline:Map<IRenderable, RenderType>;
+    private var _validationPipeline:Map<IValidatable, ValidationType>;
     private var _shapeRenderer:Shape;
+    private var _frameNumber:UInt;
+    private var _runtime:Int;
+    private var _deltaTime:Int;
 
+
+    /**
+     *  Graphics renderer, used to obtain graphics context
+     */
     public var shapeRenderer(get, null):Shape;
 
     public function get_shapeRenderer():Shape {
@@ -67,8 +73,6 @@ class Blitting extends AbstractController<Blitting>
     /**
      * Current (total) frame number.
      */
-    private var _frameNumber:UInt;
-
     public var frameNumber (get, null):UInt;
 
     public function get_frameNumber():UInt {
@@ -76,10 +80,8 @@ class Blitting extends AbstractController<Blitting>
     }
 
     /**
-        Total time elapsed of viewport, in milliseconds.
-    **/
-    private var _runtime:Int;
-
+     *  Total time elapsed of engine, in milliseconds.
+     */
     public var runtime (get, null):Int;
 
     public function get_runtime():Int {
@@ -87,10 +89,8 @@ class Blitting extends AbstractController<Blitting>
     }
 
     /**
-        Total time elapsed of viewport, in milliseconds.
-    **/
-    private var _deltaTime:Int;
-
+     *  Time since last frame render, in milliseconds.
+     */
     public var deltaTime (get, null):Int;
 
     public function get_deltaTime():Int {
@@ -106,9 +106,9 @@ class Blitting extends AbstractController<Blitting>
         super();
 
         // instantiate pipelines
-        layoutPipeline = new Map<IResizable, Bool>();
-        renderPipeline = new Map<IRenderable, RenderType>();
-        validationPipeline = new Map<IValidatable, ValidationType>();
+        _layoutPipeline = new Map<IResizable, Bool>();
+        _renderPipeline = new Map<IRenderable, RenderType>();
+        _validationPipeline = new Map<IValidatable, ValidationType>();
 
         // instantiate renderer
         _shapeRenderer = new Shape();
@@ -129,11 +129,11 @@ class Blitting extends AbstractController<Blitting>
         if (type == null)
             type = ValidationType.Self;
 
-        validationPipeline.set(validatable, type);
+        _validationPipeline.set(validatable, type);
     }
 
     public function addLayout(resizable:IResizable):Void {
-        layoutPipeline.set(resizable, true);
+        _layoutPipeline.set(resizable, true);
     }
 
     public function addRenderer(renderer:IRenderable, ?renderType:RenderType):Void {
@@ -142,60 +142,60 @@ class Blitting extends AbstractController<Blitting>
 
         switch (renderType) {
             case RenderType.Continuous:
-                renderPipeline.set(renderer, RenderType.Continuous);
+                _renderPipeline.set(renderer, RenderType.Continuous);
             case RenderType.Once:
-                if (renderPipeline.exists(renderer) && renderPipeline[renderer] == RenderType.Continuous)
+                if (_renderPipeline.exists(renderer) && _renderPipeline[renderer] == RenderType.Continuous)
                     return;
-                renderPipeline.set(renderer, RenderType.Once);
+                _renderPipeline.set(renderer, RenderType.Once);
             case RenderType.OnInvalidation:
-                // TODO: Evaluate whether validation should be implemented here or in renderered viewport.
+            // TODO: Evaluate whether validation should be implemented here or in renderered viewport.
         }
     }
 
     public function changeRenderer(renderer:IRenderable, renderType:RenderType):Void {
-        renderPipeline.set(renderer, renderType);
+        _renderPipeline.set(renderer, renderType);
     }
 
     private function frameConstructedHandler(event:Event):Void {
         ++_frameNumber;
 
         // validation
-        for (validatable in validationPipeline.keys()) {
+        for (validatable in _validationPipeline.keys()) {
             validatable.validate();
-            validationPipeline.remove(validatable);
+            _validationPipeline.remove(validatable);
         }
 
         // layout
-        for (resizable in layoutPipeline.keys()) {
+        for (resizable in _layoutPipeline.keys()) {
             resizable.layout();
-            layoutPipeline.remove(resizable);
+            _layoutPipeline.remove(resizable);
         }
 
         // pre-render
-        for (prerenderer in renderPipeline.keys()) {
+        for (prerenderer in _renderPipeline.keys()) {
             prerenderer.prerender();
         }
 
         // render
-        for (renderer in renderPipeline.keys()) {
+        for (renderer in _renderPipeline.keys()) {
             renderer.render();
         }
     }
 
     private function exitFrameHandler(event:Event):Void {
         // postrender
-        for (renderer in renderPipeline.keys()) {
+        for (renderer in _renderPipeline.keys()) {
             renderer.postrender();
 
-            if (renderPipeline[renderer] == RenderType.Once)
-                renderPipeline.remove(renderer);
+            if (_renderPipeline[renderer] == RenderType.Once)
+                _renderPipeline.remove(renderer);
         }
 
         _deltaTime = Lib.getTimer();
     }
 
     public function removeRenderer(renderer:IRenderable):Void {
-        renderPipeline.remove(renderer);
+        _renderPipeline.remove(renderer);
     }
 
     public function stop():Void {
@@ -206,9 +206,9 @@ class Blitting extends AbstractController<Blitting>
     public function dispose():Void {
         stop();
 
-        layoutPipeline = null;
-        renderPipeline = null;
-        validationPipeline = null;
+        _layoutPipeline = null;
+        _renderPipeline = null;
+        _validationPipeline = null;
 
         _shapeRenderer = null;
 
