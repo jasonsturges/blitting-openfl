@@ -11,7 +11,6 @@ package blitting.display;
 
 import openfl.display.StageDisplayState;
 import openfl.events.Event;
-import blitting.core.Blitting;
 import blitting.display.RenderedViewport;
 import blitting.lifecycle.IResizable;
 
