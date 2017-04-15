@@ -48,8 +48,6 @@ implements IValidatable {
         super.initialize();
 
         _invalidated = false;
-        mouseEnabled = mouseChildren = tabChildren = false;
-        //focusRect = tabEnabled  = false;
 
         addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
     }
