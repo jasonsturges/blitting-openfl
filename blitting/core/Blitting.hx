@@ -119,6 +119,7 @@ implements IProcess {
 
     public function start():Void {
         _runtime = _deltaTime = Lib.getTimer();
+        _frameNumber = 0;
 
         // add frame constructed and exit frame listeners to graphics renderer
         _shapeRenderer.addEventListener(Event.FRAME_CONSTRUCTED, frameConstructedHandler);
