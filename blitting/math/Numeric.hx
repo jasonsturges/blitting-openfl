@@ -28,6 +28,13 @@ package blitting.math;
 
 class Numeric {
 
+    /**
+     *  Constrain value within a minimum and maximum range.
+     *  @param value  Value to clamp within range
+     *  @param low    Minimum value
+     *  @param high   Maximum value
+     *  @return       Value within range
+     */
     public static function clamp<T>(value:T, low:T, high:T):T {
         if (Reflect.compare(value, low) < 0)
             return low;
