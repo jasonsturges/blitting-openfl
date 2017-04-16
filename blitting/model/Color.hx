@@ -6,170 +6,63 @@
                                      |___/
     Blitting, http://blitting.com
     Copyright (c) 2014 Jason Sturges, http://jasonsturges.com
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of
+    this software and associated documentation files (the "Software"), to deal in
+    the Software without restriction, including without limitation the rights to use,
+    copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+    Software, and to permit persons to whom the Software is furnished to do so,
+    subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+    THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 package blitting.model;
 
+import blitting.math.Numeric;
 import blitting.constant.ColorPalette;
-import blitting.lifecycle.IInitializable;
-
-/**
- * 32-bit ARGB color structure
- */
-class Color implements IInitializable {
-    public var rgb(get, never):Int;
-    public var argb(get, never):Int;
-    public var rgba(get, never):Int;
-    public var red(get, never):Int;
-    public var green(get, never):Int;
-    public var blue(get, never):Int;
-    public var alpha(get, never):Int;
 
 
-    //------------------------------
-    //  model
-    //------------------------------
+class Color {
 
     /**
-     * 32-bit ARGB color
-     *
-     * 8-bit alpha  (0x0 - 0xff)
-     * 8-bit red    (0x0 - 0xff)
-     * 8-bit green  (0x0 - 0xff)
-     * 8-bit blue   (0x0 - 0xff)
+     *  Darken a color by an amount between 0 and 1, where
+     *  lower values are darker.
+     *  @param color  Color to be darkened
+     *  @param value  Amount between 0 and 1, where lower is darker
+     *  @return UInt  Darkened color
      */
-    private var color:Int;
+    public static function darken(color:UInt, value:Float):UInt {
+        value = Numeric.clamp(value, 0, 1);
 
-    /**
-     * Get 24-bit unsigned int of 8-bit red, green, and blue
-     *
-     * @return 24-bit unsigned int of 8-bit red, green, and blue.
-     */
-    private function get_rgb():Int {
-        return 0xffffff & color;
-    }
-
-    /**
-     * Get 32-bit unsigned int of 8-bit alpha, red, green, blue.
-     *
-     * @return 32-bit unsigned int of 8-bit alpha, red, green, blue.
-     */
-    private function get_argb():Int {
-        return color;
-    }
-
-    /**
-     * Get 32-bit unsigned int of 8-bit red, green, blue, alpha.
-     *
-     * @return 32-bit unsigned int of 8-bit red, green, blue, alpha.
-     */
-    private function get_rgba():Int {
-        return color << 8 | color >>> 24;
-    }
-
-    /**
-     * Get unsigned int of 8-bit red.
-     *
-     * @return Unsigned int of 8-bit red.
-     */
-    private function get_red():Int {
-        return color >>> 16 & 0xff;
-    }
-
-    /**
-     * Get unsigned int of 8-bit green.
-     * @return Unsigned int of 8-bit green.
-     */
-    private function get_green():Int {
-        return color >>> 8 & 0xff;
-    }
-
-    /**
-     * Get unsigned int of 8-bit blue.
-     *
-     * @return Unsigned int of 8-bit blue.
-     */
-    private function get_blue():Int {
-        return color & 0xff;
-    }
-
-    /**
-     * Get unsigned int of 8-bit alpha.
-     *
-     * @return Unsigned int of 8-bit alpha.
-     */
-    private function get_alpha():Int {
-        return color >>> 24 & 0xff;
-    }
-
-
-    //------------------------------
-    //  lifecycle
-    //------------------------------
-
-    /**
-     * Constructor, initializing color to black with full alpha.
-     *
-     * @param red    8-bit red.
-     * @param green  8-bit green.
-     * @param blue   8-bit blue.
-     * @param alpha  8-bit alpha.
-     *
-     */
-    public function new(red:Int = 0x0, green:Int = 0x0, blue:Int = 0x0, alpha:Int = 0xff) {
-        color = alpha << 24 | red << 16 | green << 8 | blue;
-    }
-
-    /**
-     * IInitialize initialization.
-     *
-     */
-    public function initialize():Void {
-        color = 0x0;
-    }
-
-    /**
-     * Get ARGB values from 32-bit integer.
-     *
-     * @param color  32-bit ARGB color as unsigned integer.
-     * @return       Color instance of 8-bit alpha, red, green, blue.
-     */
-    public static function fromARGB(color:Int):Color {
-        return new Color(color >>> 16 & 0xff, // red
-                         color >>> 8 & 0xff, // green
-                         color & 0xff, // blue
-                         color >>> 24 // alpha
+        return fromARGB(getAlpha(color),
+                        Math.floor(getRed(color) * value),
+                        Math.floor(getGreen(color) * value),
+                        Math.floor(getBlue(color) * value)
                         );
     }
 
     /**
-     * Get RGBA values from 32-bit integer.
-     *
-     * In ActionScript, ARGB is typically used.
-     * Use getARGB for ARGB value.
-     *
-     * This function is provided for compatibility.
-     *
-     * @param color  32-bit ARGB color as unsigned integer.
-     * @return       Color instance of 8-bit red, green, blue, alpha.
+     *  Lighten a color by an amount between 0 and 1, where
+     *  higher values are lighter.
+     *  @param color  Color to be darkened
+     *  @param value  Amount between 0 and 1, where higher is lighter
+     *  @return UInt  Lightened color
      */
-    public static function fromRGBA(color:Int):Color {
-        return new Color(color >>> 24, // red
-                         color >>> 16 & 0xff, // green
-                         color >>> 8 & 0xf, // blue
-                         color & 0xff // alpha
-                        );
-    }
+    public static function lighten(color:UInt, value:Float):UInt {
+        value = Numeric.clamp(value, 0, 1);
 
-    /**
-     * Get RGB values from 24-bit integer.
-     *
-     * @param color  24-bit RGB color as unsigned integer.
-     * @return       Color instance of 8-bit red, green, blue.
-     */
-    public static function fromRGB(color:Int):Color {
-        return new Color(color >> 16 & 0xff, // red
-                         color >> 8 & 0xff, // green
-                         color & 0xff // blue
+        return fromARGB(getAlpha(color),
+                        Math.ceil((getRed(color) + 0xff) * value),
+                        Math.ceil((getGreen(color) + 0xff) * value),
+                        Math.ceil((getBlue(color) + 0xff) * value)
                         );
     }
 
@@ -181,8 +74,8 @@ class Color implements IInitializable {
      * @see ColorPalette
      *
      */
-    public static function fromName(name:String):Color {
-        return Color.fromRGB(ColorPalette.fromName(name));
+    public static function fromName(name:String):UInt {
+        return ColorPalette.fromName(name);
     }
 
     /**
@@ -194,7 +87,7 @@ class Color implements IInitializable {
      * @param blue   8-bit Blue.
      * @return       32-bit ARGB unsigned integer.
      */
-    public static function getARGB(alpha:Int, red:Int, green:Int, blue:Int):Int {
+    public static function fromARGB(alpha:UInt, red:UInt, green:UInt, blue:UInt):UInt {
         return alpha << 24 | red << 16 | green << 8 | blue;
     }
 
@@ -205,7 +98,7 @@ class Color implements IInitializable {
      * @param rgb    24-bit RGB.
      * @return       32-bit ARGB unsigned integer.
      */
-    public static function getARGBFromAlphaAndRGB(rgb:Int, alpha:Int = 0xff):Int {
+    public static function fromRGBWithAlpha(rgb:UInt, alpha:UInt = 0xff):UInt {
         return (alpha << 24) + rgb;
     }
 
@@ -223,7 +116,7 @@ class Color implements IInitializable {
      * @param alpha  8-bit Alpha.
      * @return       32-bit RGBA unsigned integer.
      */
-    public static function getRGBA(red:Int, green:Int, blue:Int, alpha:Int):Int {
+    public static function fromRGBA(red:UInt, green:UInt, blue:UInt, alpha:UInt):UInt {
         return red << 24 | green << 16 | blue << 8 | alpha;
     }
 
@@ -233,18 +126,8 @@ class Color implements IInitializable {
      * @param color 32-bit ARGB unsigned int.
      * @return 32-bit RGBA unsigned int.
      */
-    public static function getRGBAFromARGB(color:Int):Int {
+    public static function getRGBAFromARGB(color:UInt):UInt {
         return color << 8 | color >>> 24;
-    }
-
-    /**
-     * Get 32-bit ARGB from RGBA unsigned int.
-     *
-     * @param color 32-bit RGBA unsigned int.
-     * @return 32-bit ARGB unsigned int.
-     */
-    public static function getARGBFromRGBA(color:Int):Int {
-        return color >>> 8 | color << 24;
     }
 
     /**
@@ -255,38 +138,75 @@ class Color implements IInitializable {
      * @param blue   8-bit Blue.
      * @return       32-bit RGB unsigned integer.
      */
-    public static function getRGB(red:Int, green:Int, blue:Int):Int {
+    public static function fromRGB(red:UInt, green:UInt, blue:UInt):UInt {
         return red << 16 | green << 8 | blue;
     }
 
     /**
-     * Get Alpha from a 32-bit ARGB unsigned integer.
+     * Get 32-bit ARGB from RGBA unsigned int.
+     *
+     * @param color 32-bit RGBA unsigned int.
+     * @return 32-bit ARGB unsigned int.
+     */
+    public static function getARGBFromRGBA(color:UInt):UInt {
+        return color >>> 8 | color << 24;
+    }
+
+    /**
+     * Get alpha from a 32-bit ARGB unsigned integer.
      *
      * @param color  32-bit ARGB color as unsigned integer.
      * @return       8-bit alpha.
      */
-    public static function getAlpha(color:Int):Int {
+    public static function getAlpha(color:UInt):UInt {
         return color >>> 24;
     }
 
     /**
-     * Get Red from an unsigned integer.
+     *  Get alpha floating point value from a 32-bit ARGB unsigned integer.
+     *  @param color    32-bit ARGB unsigned integer
+     *  @return Float   Alpha value between 0 and 1.
+     */
+    public static function getAlphaFloat(color:UInt):Float {
+        return (color >>> 24) / 0xff;
+    }
+
+    /**
+     * Get red from an unsigned integer.
      *
      * @param color  24-bit RGB color as unsigned integer.
      * @return       8-bit red.
      */
-    public static function getRed(color:Int):Int {
+    public static function getRed(color:UInt):UInt {
         return color >>> 16 & 0xFF;
     }
 
     /**
-     * Get Green from an unsigned integer.
+     *  Get red floating point value from a 32-bit ARGB unsigned integer.
+     *  @param color    32-bit ARGB unsigned integer
+     *  @return Float   Red value between 0 and 1.
+     */
+    public static function getRedFloat(color:UInt):Float {
+        return (color >>> 16 & 0xFF) / 0xff;
+    }
+
+    /**
+     * Get green from an unsigned integer.
      *
      * @param color  24-bit RGB color as unsigned integer.
      * @return       8-bit green.
      */
-    public static function getGreen(color:Int):Int {
+    public static function getGreen(color:UInt):UInt {
         return color >>> 8 & 0xFF;
+    }
+
+    /**
+     *  Get green floating point value from a 32-bit ARGB unsigned integer.
+     *  @param color    32-bit ARGB unsigned integer
+     *  @return Float   Green value between 0 and 1.
+     */
+    public static function getGreenFloat(color:UInt):Float {
+        return (color >>> 8 & 0xFF) / 0xff;
     }
 
     /**
@@ -295,8 +215,17 @@ class Color implements IInitializable {
      * @param color  24-bit RGB color as unsigned integer.
      * @return       8-bit blue.
      */
-    public static function getBlue(color:Int):Int {
+    public static function getBlue(color:UInt):UInt {
         return color & 0xFF;
+    }
+
+    /**
+     *  Get blue floating point value from a 32-bit ARGB unsigned integer.
+     *  @param color    32-bit ARGB unsigned integer
+     *  @return Float   Blue value between 0 and 1.
+     */
+    public static function getBlueFloat(color:UInt):Float {
+        return (color & 0xFF) / 0xff;
     }
 
 }
