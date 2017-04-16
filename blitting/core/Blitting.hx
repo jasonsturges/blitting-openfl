@@ -73,7 +73,7 @@ implements IProcess {
     /**
      * Current (total) frame number.
      */
-    public var frameNumber (get, null):UInt;
+    public var frameNumber(get, null):UInt;
 
     public function get_frameNumber():UInt {
         return _frameNumber;
@@ -82,7 +82,7 @@ implements IProcess {
     /**
      *  Total time elapsed of engine, in milliseconds.
      */
-    public var runtime (get, null):Int;
+    public var runtime(get, null):Int;
 
     public function get_runtime():Int {
         return Lib.getTimer() - _runtime;
@@ -91,7 +91,7 @@ implements IProcess {
     /**
      *  Time since last frame render, in milliseconds.
      */
-    public var deltaTime (get, null):Int;
+    public var deltaTime(get, null):Int;
 
     public function get_deltaTime():Int {
         return Lib.getTimer() - _deltaTime;
