@@ -51,6 +51,7 @@ import blitting.model.Range;
 import blitting.model.Stroke;
 import blitting.net.AbstractService;
 import blitting.net.AbstractSocketService;
+import blitting.net.JsonService;
 import blitting.net.XmlService;
 import blitting.renderer.AbstractRenderer;
 import blitting.renderer.BitmapRenderer;
