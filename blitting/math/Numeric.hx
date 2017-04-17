@@ -124,14 +124,6 @@ class Numeric {
         return numString;
     }
 
-    // TODO: Not implemented
-    ///**
-    // * Inaccurate log 10.
-    // */
-    //public static function log10(n:Float):Float {
-    //    return Math.log(n) * Math.LOG10E;
-    //}
-
     /**
      * Get a random `Float` where min &lt;= n &lt; max
      */
@@ -155,7 +147,6 @@ class Numeric {
      *
      * Examples:
      *
-     * ```haxe
      *    trace(0.9 - 1); // -0.09999999999999998
      *
      *    trace(Numeric.roundDecimal(0.9 - 1, 1)); // -0.1
@@ -164,7 +155,7 @@ class Numeric {
      *    trace(Numeric.roundDecimal(0.9 - 1.123, 1)); // -0.2
      *    trace(Numeric.roundDecimal(0.9 - 1.123, 2)); // -0.22
      *    trace(Numeric.roundDecimal(0.9 - 1.123, 3)); // -0.223
-     * ```
+     *
      *
      * @param n Float to be rounded.
      * @param precision Decimal places.
@@ -180,17 +171,16 @@ class Numeric {
      *
      * Example:
      *
-     * ```haxe
      *    roundToNearest(.25, 19.95)   = 20
      *    roundToNearest(50, 1275)     = 1300
-     * ```
+     *
      */
     public static function roundToNearest(roundTo:Float, value:Float):Float {
         return Math.round(value / roundTo) * roundTo;
     }
 
     /**
-     * Round a number to an even number.
+     * Round an integer to an even number.
      *
      * Example:
      *
