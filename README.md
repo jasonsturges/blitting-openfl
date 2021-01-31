@@ -8,6 +8,8 @@ Blitting OpenFL is a rendering engine and lifecycle pipeline, distributed as a h
 Focused in bit blit (bit-boundary block transfer), Blitting leverages performance oriented design
 for graphics, bitmap, and 3D rendering.  Through a core engine, pipelines optimize rendering, layout, and invalidation lifecycles.
 
+![screen-capture](https://user-images.githubusercontent.com/1213591/106399568-0b195b00-63df-11eb-84a5-4ac49c405306.png)
+
 Blitting OpenFL is an [OpenFL](http://www.openfl.org/) port to the [Haxe](http://haxe.org/) programming language
 of the [Blitting](https://github.com/jasonsturges/blitting) ActionScript library.  ActionScript developers should use Blitting.
 
